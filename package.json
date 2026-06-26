@@ -1,0 +1,14 @@
+{
+  "name": "cafe-rustico",
+  "version": "1.0.0",
+  "description": "Sitio web frontend para cafetería moderna con toque rústico",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": ["html", "css", "javascript", "cafeteria", "frontend"],
+  "author": "TU_NOMBRE",
+  "license": "MIT",
+  "devDependencies": {}
+}
