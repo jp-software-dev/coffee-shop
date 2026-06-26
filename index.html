@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Café Rústico - Cafetería de especialidad urbana. Una experiencia moderna y sofisticada con alma rústica.">
+    <title>Café Rústico | Specialty Coffee Experience</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#inicio" class="logo">
+                <i data-lucide="coffee" style="color: white; width: 30px; height: 30px;"></i>
+                <span>Café Rústico</span>
+            </a>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+
+            <div class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de navegación" role="button">
+                <i data-lucide="menu"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="inicio" class="hero">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="https://videos.pexels.com/video-files/8430960/8430960-uhd_4096_2160_25fps.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Donde cada sorbo cuenta una historia</h1>
+                <p class="slogan">Café Rústico — Est. 2024</p>
+                <p>Cafetería de especialidad urbana con alma rústica. Descubre la armonía perfecta entre el aroma artesanal y la sofisticación moderna.</p>
+                <div class="hero-btns">
+                    <a href="#menu" class="btn btn-primary">Ver nuestro menú</a>
+                    <a href="#ubicacion" class="btn btn-outline">Encuéntranos</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="section section-menu">
+            <div class="container">
+                <h2 class="section-title reveal">Nuestro Menú</h2>
+                <p class="section-subtitle reveal">Specialty Selection</p>
+
+                <div class="filter-container reveal">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="cafes">Cafés</button>
+                    <button class="filter-btn" data-filter="frias">Bebidas Frías</button>
+                    <button class="filter-btn" data-filter="postres">Postres</button>
+                    <button class="filter-btn" data-filter="alimentos">Alimentos</button>
+                </div>
+
+                <div class="menu-grid">
+                    <article class="menu-card reveal" data-category="cafes">
+                        <span class="category-badge">Specialty</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/36179806/pexels-photo-36179806.jpeg" alt="Americano">
+                        </div>
+                        <div class="card-content">
+                            <h3>Americano</h3>
+                            <p>Blend de la casa con notas achocolatadas y cuerpo balanceado.</p>
+                            <div class="card-footer">
+                                <span class="price">$45</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card reveal reveal-delay-1" data-category="cafes">
+                        <span class="category-badge">Specialty</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/575278/pexels-photo-575278.jpeg" alt="Cappuccino">
+                        </div>
+                        <div class="card-content">
+                            <h3>Cappuccino</h3>
+                            <p>Doble shot de espresso con leche cremosa y microespuma sedosa.</p>
+                            <div class="card-footer">
+                                <span class="price">$65</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card reveal reveal-delay-2" data-category="cafes">
+                        <span class="category-badge">Specialty</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/5567628/pexels-photo-5567628.jpeg" alt="Latte de Vainilla">
+                        </div>
+                        <div class="card-content">
+                            <h3>Latte de Vainilla</h3>
+                            <p>Infusión artesanal de vainilla orgánica y leche seleccionada.</p>
+                            <div class="card-footer">
+                                <span class="price">$70</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card reveal" data-category="cafes">
+                        <span class="category-badge">Iced</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/4307385/pexels-photo-4307385.jpeg" alt="Frappé de Caramelo">
+                        </div>
+                        <div class="card-content">
+                            <h3>Frappé de Caramelo</h3>
+                            <p>Textura terciopelo con caramelo salado y crema batida premium.</p>
+                            <div class="card-footer">
+                                <span class="price">$75</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card reveal reveal-delay-1" data-category="frias">
+                        <span class="category-badge">Cold Brew</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/1141626/pexels-photo-1141626.jpeg" alt="Té Frío de Durazno">
+                        </div>
+                        <div class="card-content">
+                            <h3>Té Frío de Durazno</h3>
+                            <p>Hojas de té seleccionadas con esencia natural de durazno.</p>
+                            <div class="card-footer">
+                                <span class="price">$55</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card reveal reveal-delay-2" data-category="frias">
+                        <span class="category-badge">Refreshing</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/5668215/pexels-photo-5668215.jpeg" alt="Limonada con Menta">
+                        </div>
+                        <div class="card-content">
+                            <h3>Limonada con Menta</h3>
+                            <p>Cítricos frescos con menta orgánica de nuestro huerto.</p>
+                            <div class="card-footer">
+                                <span class="price">$50</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card reveal" data-category="postres">
+                        <span class="category-badge">Gourmet</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/827513/pexels-photo-827513.jpeg" alt="Cheesecake de Frutos Rojos">
+                        </div>
+                        <div class="card-content">
+                            <h3>Cheesecake</h3>
+                            <p>Base crocante con coulis de frutos rojos silvestres.</p>
+                            <div class="card-footer">
+                                <span class="price">$80</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card reveal reveal-delay-1" data-category="postres">
+                        <span class="category-badge">Gourmet</span>
+                        <div class="card-img">
+                            <img src="https://images.pexels.com/photos/9500627/pexels-photo-9500627.jpeg" alt="Brownie con Helado">
+                        </div>
+                        <div class="card-content">
+                            <h3>Brownie Supreme</h3>
+                            <p>Chocolate belga al 70% servido con gelato de vainilla.</p>
+                            <div class="card-footer">
+                                <span class="price">$75</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="ubicacion" class="section section-location">
+            <div class="container">
+                <h2 class="section-title reveal">Nuestra Ubicación</h2>
+                <p class="section-subtitle reveal">Visítanos en el corazón de la ciudad</p>
+
+                <div class="location-grid">
+                    <div class="map-wrapper reveal">
+                        <div class="map-container" id="map"></div>
+                    </div>
+
+                    <div class="location-cards">
+                        <div class="info-card slide-in-right">
+                            <div class="icon-box"><i data-lucide="map-pin"></i></div>
+                            <div class="info-content">
+                                <h4>Dirección</h4>
+                                <p>Av. Principal #123, Colonia Centro,<br>Ciudad de México.</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card slide-in-right">
+                            <div class="icon-box"><i data-lucide="clock"></i></div>
+                            <div class="info-content">
+                                <h4>Horario de Atención</h4>
+                                <p>Lunes a Viernes: 9:00 AM - 8:00 PM<br>
+                                Sábado: 9:00 AM - 2:00 PM<br>
+                                <span class="highlight-text">DOMINGO: CERRADO</span></p>
+                            </div>
+                        </div>
+
+                        <div class="info-card slide-in-right">
+                            <div class="icon-box"><i data-lucide="phone"></i></div>
+                            <div class="info-content">
+                                <h4>Contacto</h4>
+                                <p>Tel: +52 7211 00 1122<br>
+                                Email: contacto@tudominio.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacto" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <h2>Café Rústico</h2>
+                    <p>Cafetería especializada en café de origen.<br>Comprometidos con la excelencia artesanal y la calidad en cada taza.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-circle" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-circle" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-circle" aria-label="TikTok">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5>MENÚ</h5>
+                    <ul class="footer-links">
+                        <li><a href="#menu">Americano</a></li>
+                        <li><a href="#menu">Cappuccino</a></li>
+                        <li><a href="#menu">Latte de Vainilla</a></li>
+                        <li><a href="#menu">Frappé de Caramelo</a></li>
+                        <li><a href="#menu">Postres Gourmet</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>NAVEGACIÓN</h5>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#menu">Menú</a></li>
+                        <li><a href="#ubicacion">Ubicación</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>CONTACTO</h5>
+                    <ul class="contact-info-list">
+                        <li><i data-lucide="map-pin"></i> Ciudad de México</li>
+                        <li><i data-lucide="phone"></i> +52 7211 00 1122</li>
+                        <li><i data-lucide="mail"></i> contacto@tudominio.com</li>
+                        <li><i data-lucide="clock"></i> Lunes a Viernes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/527211001122" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat en WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+        </svg>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
