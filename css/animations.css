@@ -1,0 +1,126 @@
+/* 
+   Café Rústico - Animaciones Sophisticadas
+*/
+
+/* Revelar elementos al hacer scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 1. Slide-in desde la derecha para cards de ubicación */
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-in-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger para cards de ubicación */
+.location-cards .slide-in-right:nth-child(1) { transition-delay: 0.1s; }
+.location-cards .slide-in-right:nth-child(2) { transition-delay: 0.2s; }
+.location-cards .slide-in-right:nth-child(3) { transition-delay: 0.3s; }
+
+/* 2. Stagger para columnas del footer */
+.footer-col {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.footer-col.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.footer-grid .footer-col:nth-child(1) { transition-delay: 0.1s; }
+.footer-grid .footer-col:nth-child(2) { transition-delay: 0.2s; }
+.footer-grid .footer-col:nth-child(3) { transition-delay: 0.3s; }
+.footer-grid .footer-col:nth-child(4) { transition-delay: 0.4s; }
+
+/* 3. Shake horizontal para errores de validación */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+}
+
+.input-error {
+    animation: shake 0.4s ease;
+    border-color: var(--color-accent) !important;
+}
+
+/* 4. Pulse para botón enviar */
+@keyframes pulse-secondary {
+    0% { box-shadow: 0 0 0 0 rgba(232, 197, 71, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(232, 197, 71, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(232, 197, 71, 0); }
+}
+
+.btn-submit:hover {
+    transform: scale(1.02);
+    animation: pulse-secondary 1.5s infinite;
+}
+
+/* 5. Animación del Scroll Indicator */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -10px); }
+    60% { transform: translate(-50%, -5px); }
+}
+
+.scroll-indicator {
+    animation: bounce 2s infinite;
+}
+
+/* Entrada Hero */
+@keyframes fadeInUpLarge {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content {
+    animation: fadeInUpLarge 1.4s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+/* Menú cards fade */
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.menu-card.fade-in {
+    animation: fadeInScale 0.5s ease-out forwards;
+}
+
+/* Respetar preferencias de movimiento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal, .slide-in-right, .footer-col {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
