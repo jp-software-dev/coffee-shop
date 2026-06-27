@@ -17,10 +17,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.getElementById('nav-links');
     const links = document.querySelectorAll('.nav-links a');
 
+    // Alterna el menú mobile: muestra/oculta el dropdown, cambia el icono (menu <-> x)
+    // y fuerza el fondo sólido del navbar para que el dropdown no se vea transparente sobre el hero
+    const toggleMobileMenu = () => {
+        const isOpen = navLinks.classList.toggle('mobile-active');
+        navbar.classList.toggle('menu-open', isOpen);
+        mobileToggle.setAttribute('aria-expanded', isOpen);
+
+        const icon = mobileToggle.querySelector('i');
+        if (icon) {
+            icon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+    };
+
+    const closeMobileMenu = () => {
+        navLinks.classList.remove('mobile-active');
+        navbar.classList.remove('menu-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+
+        const icon = mobileToggle.querySelector('i');
+        if (icon) {
+            icon.setAttribute('data-lucide', 'menu');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+    };
+
     if (mobileToggle && navLinks) {
-        mobileToggle.addEventListener('click', () => navLinks.classList.toggle('mobile-active'));
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileToggle.addEventListener('click', toggleMobileMenu);
         links.forEach(link => {
-            link.addEventListener('click', () => navLinks.classList.remove('mobile-active'));
+            link.addEventListener('click', closeMobileMenu);
         });
     }
 
@@ -71,12 +98,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. LÓGICA DE RESERVAS CON UX/FEEDBACK VISUAL
     const bookingForm = document.getElementById('bookingForm');
     const fechaInput = document.getElementById('fecha');
+    const telefonoInput = document.getElementById('telefono');
 
     if (fechaInput) {
         // Establecer fecha mínima a hoy para evitar reservas pasadas
         const today = new Date().toISOString().split('T')[0];
         fechaInput.setAttribute('min', today);
     }
+
+    if (telefonoInput) {
+        // El teléfono mexicano son 10 dígitos: se bloquea cualquier letra/símbolo en tiempo real
+        // y se corta el valor si el usuario intenta pegar o escribir más de 10 caracteres
+        telefonoInput.setAttribute('maxlength', '10');
+        telefonoInput.setAttribute('inputmode', 'numeric');
+        telefonoInput.addEventListener('input', () => {
+            telefonoInput.value = telefonoInput.value.replace(/\D/g, '').slice(0, 10);
+        });
+    }
+
+    // Valida que el correo tenga una estructura básica válida: texto@texto.dominio
+    const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+    // Valida que el teléfono tenga exactamente 10 dígitos numéricos (estándar de México)
+    const isValidPhone = (value) => /^\d{10}$/.test(value);
 
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
@@ -94,6 +138,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => input.classList.remove('input-error'), 400);
                 }
             });
+
+            // Validación de formato de correo (debe contener arroba y dominio)
+            const emailInput = document.getElementById('email');
+            if (emailInput.value && !isValidEmail(emailInput.value)) {
+                emailInput.classList.add('input-error');
+                isValid = false;
+                setTimeout(() => emailInput.classList.remove('input-error'), 400);
+            }
+
+            // Validación de teléfono (exactamente 10 dígitos, sin letras)
+            if (telefonoInput.value && !isValidPhone(telefonoInput.value)) {
+                telefonoInput.classList.add('input-error');
+                isValid = false;
+                setTimeout(() => telefonoInput.classList.remove('input-error'), 400);
+            }
 
             if (!isValid) return;
 
