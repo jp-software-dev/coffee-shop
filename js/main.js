@@ -36,30 +36,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.reveal, .slide-in-right').forEach(el => observer.observe(el));
 
-    // 4. LÓGICA DEL MENÚ
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const menuCards = document.querySelectorAll('.menu-card');
+    // 4. LÓGICA DE RESERVAS
+    const bookingForm = document.getElementById('bookingForm');
+    const fechaInput = document.getElementById('fecha');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
+    if (fechaInput) {
+        // Establecer fecha mínima a hoy
+        const today = new Date().toISOString().split('T')[0];
+        fechaInput.setAttribute('min', today);
+    }
 
-            menuCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                card.classList.remove('fade-in');
-                
-                if (filter === 'all' || category === filter) {
-                    card.classList.remove('hidden');
-                    void card.offsetWidth; 
-                    card.classList.add('fade-in');
-                } else {
-                    card.classList.add('hidden');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const fields = ['nombre', 'email', 'telefono', 'personas', 'fecha', 'hora'];
+            let isValid = true;
+
+            fields.forEach(fieldId => {
+                const input = document.getElementById(fieldId);
+                if (!input.value) {
+                    input.classList.add('input-error');
+                    isValid = false;
+                    setTimeout(() => input.classList.remove('input-error'), 400);
                 }
             });
+
+            if (!isValid) return;
+
+            const data = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value,
+                personas: document.getElementById('personas').value,
+                fecha: document.getElementById('fecha').value,
+                hora: document.getElementById('hora').value,
+                mensaje: document.getElementById('mensaje').value || 'Sin comentarios adicionales.'
+            };
+
+            const whatsappMessage = `Hola, quiero hacer una reservación:\n\n` +
+                `👤 *Nombre:* ${data.nombre}\n` +
+                `📧 *Correo:* ${data.email}\n` +
+                `📞 *Teléfono:* ${data.telefono}\n` +
+                `👥 *Personas:* ${data.personas}\n` +
+                `📅 *Fecha:* ${data.fecha}\n` +
+                `⏰ *Hora:* ${data.hora}\n` +
+                `💬 *Mensaje:* ${data.mensaje}`;
+
+            const waUrl = `https://wa.me/527211001122?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(waUrl, '_blank');
         });
-    });
+    }
 
     // 5. INTEGRACIÓN DEL MAPA GENERAL DE CDMX (Sin pin específico)
     const mapContainer = document.getElementById('map');
