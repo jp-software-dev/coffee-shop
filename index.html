@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Café Rústico - Cafetería de especialidad urbana. Una experiencia moderna y sofisticada con alma rústica.">
-    <title>Café Rústico | Specialty Coffee Experience</title>
+    
+    <!-- SEO Básico & Open Graph -->
+    <title>Café Rústico | Cafetería de Especialidad Urbana</title>
+    <meta property="og:title" content="Café Rústico | Cafetería de Especialidad Urbana">
+    <meta property="og:description" content="Descubre la armonía perfecta entre el aroma artesanal y la sofisticación moderna.">
+    <!-- Se agrega una imagen por defecto para cuando compartan el link por WhatsApp/Facebook -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1517466832364-a428140f1b7d?auto=format&w=1200&q=80&fit=crop">
+    <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Íconos (Lucide anclado a versión fija para seguridad y FontAwesome) -->
+    <script src="https://unpkg.com/lucide@0.344.0"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -22,21 +31,22 @@
             
             <ul class="nav-links" id="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
-                <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Menú</a></li>
-                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="menu.html">Menú</a></li>
                 <li><a href="#reservas">Reservas</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
             </ul>
 
-            <div class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de navegación" role="button">
+            <!-- Accesibilidad: Convertido de div a button real -->
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de navegación">
                 <i data-lucide="menu"></i>
-            </div>
+            </button>
         </div>
     </nav>
 
     <main>
         <section id="inicio" class="hero">
-            <video autoplay muted loop playsinline class="hero-video">
+            <!-- Performance: Se añade poster para que cargue visualmente antes que el video -->
+            <video autoplay muted loop playsinline class="hero-video" poster="https://images.pexels.com/photos/8430960/pexels-photo-8430960.jpeg?auto=compress&cs=tinysrgb&w=1280&q=80">
                 <source src="https://videos.pexels.com/video-files/8430960/8430960-uhd_4096_2160_25fps.mp4" type="video/mp4">
             </video>
             <div class="hero-overlay"></div>
@@ -45,12 +55,47 @@
                 <p class="slogan">Café Rústico — Est. 2024</p>
                 <p>Cafetería de especialidad urbana con alma rústica. Descubre la armonía perfecta entre el aroma artesanal y la sofisticación moderna.</p>
                 <div class="hero-btns">
-                    <a href="menu.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ver nuestro menú</a>
+                    <a href="menu.html" class="btn btn-primary">Ver nuestro menú</a>
                     <a href="#reservas" class="btn btn-outline">Reserva ahora</a>
                 </div>
             </div>
         </section>
 
+        <!-- SECCIÓN: PRUEBA SOCIAL / TESTIMONIOS (UX/Conversión) -->
+        <section id="testimonios" class="section section-testimonials reveal">
+            <div class="container">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Nuestra Comunidad</h2>
+                    <p class="section-subtitle">Lo que dicen de nosotros</p>
+                </div>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>"El mejor americano de la zona centro. El ambiente es perfecto para trabajar o venir en pareja. El diseño rústico te atrapa desde que entras."</p>
+                        <h4>— Valeria M.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>"Me encantó el Frappé de Caramelo. Hacer la reservación fue súper rápido por WhatsApp. Excelente atención y la comida de primera."</p>
+                        <h4>— Roberto G.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p>"Los postres Gourmet son una delicia, sobre todo el Cheesecake. Ideal para una cita relajada el fin de semana."</p>
+                        <h4>— Ana P.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: RESERVAS -->
         <section id="reservas" class="section section-reservas reveal">
             <div class="houndstooth-bg"></div>
             
@@ -100,9 +145,7 @@
                                         <option value="2">2 Personas</option>
                                         <option value="3">3 Personas</option>
                                         <option value="4">4 Personas</option>
-                                        <option value="5">5 Personas</option>
-                                        <option value="6">6 Personas</option>
-                                        <option value="7+">7+ Personas</option>
+                                        <option value="5+">+5 Personas</option>
                                     </select>
                                 </div>
                             </div>
@@ -124,20 +167,72 @@
                                 <textarea id="mensaje" name="mensaje" class="form-input min-h-[80px] resize-none" placeholder="Opcional..."></textarea>
                             </div>
 
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary btn-submit">
+                            <div class="form-actions" style="flex-direction: column; align-items: flex-end;">
+                                <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
                                     <i data-lucide="message-circle"></i>
                                     Confirmar por WhatsApp
                                 </button>
+                                <!-- Mensaje de confirmación Verde Sage -->
+                                <div id="form-success-msg" class="success-feedback">
+                                    <i data-lucide="check-circle" style="display: inline-block; vertical-align: middle; margin-right: 5px;"></i>
+                                    ¡Reserva procesada! Redirigiendo a WhatsApp...
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- SECCIÓN: UBICACIÓN -->
+        <section id="ubicacion" class="section section-location reveal">
+            <div class="container">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Ubicación</h2>
+                    <p class="section-subtitle">Visítanos en el corazón de la ciudad</p>
+                </div>
+                
+                <div class="location-grid">
+                    <div class="map-wrapper">
+                        <div id="map" class="map-container"></div>
+                    </div>
+                    <div class="location-cards">
+                        <div class="info-card slide-in-right">
+                            <div class="icon-box">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Dirección</h4>
+                                <p>Av. Paseo de la Reforma 250, Juárez, Cuauhtémoc, 06600 Ciudad de México, CDMX</p>
+                                <span class="highlight-text">Zona Centro</span>
+                            </div>
+                        </div>
+                        <div class="info-card slide-in-right">
+                            <div class="icon-box">
+                                <i data-lucide="clock"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Horarios</h4>
+                                <p>Lunes a Viernes: 7:00 AM - 9:00 PM<br>Sábados y Domingos: 8:00 AM - 8:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-card slide-in-right">
+                            <div class="icon-box">
+                                <i data-lucide="phone"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Contacto</h4>
+                                <p>+52 7211 00 1122<br>hola@caferustico.mx</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer id="contacto" class="footer">
+    <!-- FOOTER -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col footer-brand">
@@ -160,11 +255,11 @@
                 <div class="footer-col">
                     <h5>MENÚ</h5>
                     <ul class="footer-links">
-                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Americano</a></li>
-                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Cappuccino</a></li>
-                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Latte de Vainilla</a></li>
-                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Frappé de Caramelo</a></li>
-                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Postres Gourmet</a></li>
+                        <li><a href="menu.html">Americano</a></li>
+                        <li><a href="menu.html">Cappuccino</a></li>
+                        <li><a href="menu.html">Latte de Vainilla</a></li>
+                        <li><a href="menu.html">Frappé de Caramelo</a></li>
+                        <li><a href="menu.html">Postres Gourmet</a></li>
                     </ul>
                 </div>
 
@@ -172,10 +267,9 @@
                     <h5>NAVEGACIÓN</h5>
                     <ul class="footer-links">
                         <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Menú</a></li>
+                        <li><a href="menu.html">Menú</a></li>
                         <li><a href="#ubicacion">Ubicación</a></li>
                         <li><a href="#reservas">Reservas</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
 

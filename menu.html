@@ -10,28 +10,33 @@
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/animations.css">
     
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.344.0"></script>
 </head>
 <body>
 
+    <!-- NAVBAR STANDALONE -->
     <nav class="menu-nav">
-        <div class="container menu-nav-container">
-            <a href="index.html" class="back-link">
+        <div class="container menu-nav-container reveal">
+            <a href="index.html" class="back-link group">
                 <i data-lucide="arrow-left"></i>
                 <span>Volver al inicio</span>
             </a>
+            
             <div class="menu-brand">
                 <i data-lucide="coffee"></i>
                 <span class="font-display">Café Rústico</span>
             </div>
+            
+            <div class="nav-spacer hide-mobile"></div>
         </div>
     </nav>
 
+    <!-- HEADER -->
     <header class="menu-header">
-        <div class="container">
-            <h1 class="font-accent">Specialty Selection</h1>
+        <div class="container reveal">
+            <h1 class="font-accent">specialty selection</h1>
             <div class="divider-icon">
-                <img src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/delapouite/coffee-beans.svg" alt="Coffee Beans">
+                <img src="https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/delapouite/coffee-beans.svg" alt="Coffee beans icon">
             </div>
             <p class="header-desc">
                 Una curaduría artesanal donde el origen de cada grano y la frescura de cada ingrediente se encuentran para crear momentos inolvidables.
@@ -44,36 +49,84 @@
         <section class="menu-category">
             <div class="parallax-header" style="background-image: url('https://images.unsplash.com/photo-1626426229515-e8c39fcf0134?auto=format&w=1440&q=80&fit=crop');">
                 <div class="overlay"></div>
-                <div class="category-title-box">
+                <div class="category-title-box reveal">
                     <h2 class="font-display">Cafés</h2>
                 </div>
             </div>
+            
             <div class="menu-list-container">
-                <div class="container menu-items">
-                    <div class="menu-item">
+                <div class="container menu-items reveal">
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Americano</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$45</span>
                         </div>
                         <p class="item-desc">Blend de la casa con notas achocolatadas y cuerpo balanceado.</p>
-                    </div>
-                    <div class="menu-item">
+                    </article>
+                    
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Cappuccino</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$65</span>
                         </div>
                         <p class="item-desc">Doble shot de espresso con leche cremosa y microespuma sedosa.</p>
-                    </div>
-                    <div class="menu-item">
+                    </article>
+                    
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Latte de Vainilla</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$70</span>
                         </div>
                         <p class="item-desc">Infusión artesanal de vainilla orgánica y leche seleccionada.</p>
-                    </div>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Espresso</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$35</span>
+                        </div>
+                        <p class="item-desc">Esencia pura de café con cuerpo intenso y crema dorada.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Flat White</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$60</span>
+                        </div>
+                        <p class="item-desc">Equilibrio perfecto entre espresso y leche suavemente vaporizada.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Mocha Blanco</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$75</span>
+                        </div>
+                        <p class="item-desc">Espresso con chocolate blanco premium y leche cremosa.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Affogato</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$85</span>
+                        </div>
+                        <p class="item-desc">Doble shot de espresso vertido sobre una bola de gelato de vainilla.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Macchiato</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$40</span>
+                        </div>
+                        <p class="item-desc">Espresso "manchado" con una pequeña porción de espuma de leche.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -82,36 +135,84 @@
         <section class="menu-category alternate-bg">
             <div class="parallax-header" style="background-image: url('https://images.unsplash.com/photo-1574603570434-a4be4e10390c?auto=format&w=1440&q=80&fit=crop');">
                 <div class="overlay"></div>
-                <div class="category-title-box">
+                <div class="category-title-box reveal">
                     <h2 class="font-display">Bebidas Frías</h2>
                 </div>
             </div>
+            
             <div class="menu-list-container">
-                <div class="container menu-items">
-                    <div class="menu-item">
+                <div class="container menu-items reveal">
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Frappé de Caramelo</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$75</span>
                         </div>
                         <p class="item-desc">Textura terciopelo con caramelo salado y crema batida premium.</p>
-                    </div>
-                    <div class="menu-item">
+                    </article>
+                    
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Té Frío de Durazno</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$55</span>
                         </div>
                         <p class="item-desc">Hojas de té seleccionadas con esencia natural de durazno.</p>
-                    </div>
-                    <div class="menu-item">
+                    </article>
+                    
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Limonada con Menta</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$50</span>
                         </div>
                         <p class="item-desc">Cítricos frescos con menta orgánica de nuestro huerto.</p>
-                    </div>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Iced Latte</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$65</span>
+                        </div>
+                        <p class="item-desc">Espresso sobre hielo con leche fresca y un toque de jarabe.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Smoothie de Fresa</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$80</span>
+                        </div>
+                        <p class="item-desc">Mezcla refrescante de fresas naturales y yogurt griego.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Té Matcha Helado</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$90</span>
+                        </div>
+                        <p class="item-desc">Matcha ceremonial con leche de almendras y miel orgánica.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Soda Italiana</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$60</span>
+                        </div>
+                        <p class="item-desc">Agua mineral con jarabe artesanal de frutos rojos y bayas.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Cold Brew</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$70</span>
+                        </div>
+                        <p class="item-desc">Café extraído en frío por 12 horas, suave y con baja acidez.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -120,28 +221,84 @@
         <section class="menu-category">
             <div class="parallax-header" style="background-image: url('https://images.unsplash.com/photo-1638659782565-3a0b6595dc61?auto=format&w=1440&q=80&fit=crop');">
                 <div class="overlay"></div>
-                <div class="category-title-box">
+                <div class="category-title-box reveal">
                     <h2 class="font-display">Postres</h2>
                 </div>
             </div>
+            
             <div class="menu-list-container">
-                <div class="container menu-items">
-                    <div class="menu-item">
+                <div class="container menu-items reveal">
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Cheesecake</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$80</span>
                         </div>
                         <p class="item-desc">Base crocante con coulis de frutos rojos silvestres.</p>
-                    </div>
-                    <div class="menu-item">
+                    </article>
+                    
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Brownie Supreme</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$75</span>
                         </div>
                         <p class="item-desc">Chocolate belga al 70% servido con gelato de vainilla.</p>
-                    </div>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Tiramisú</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$95</span>
+                        </div>
+                        <p class="item-desc">Capas de bizcocho empapadas en espresso y crema de mascarpone.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Pastel de Chocolate</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$85</span>
+                        </div>
+                        <p class="item-desc">Tres capas de chocolate intenso con ganache de cacao al 70%.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Galletas Artesanales</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$45</span>
+                        </div>
+                        <p class="item-desc">Docena de mini galletas de chispas de chocolate recién horneadas.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Tarta de Limón</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$70</span>
+                        </div>
+                        <p class="item-desc">Base de galleta crocante con crema de limón y merengue suizo.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Muffin de Arándanos</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$55</span>
+                        </div>
+                        <p class="item-desc">Muffin esponjoso cargado de arándanos frescos y toque de vainilla.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Helado de la Casa</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$60</span>
+                        </div>
+                        <p class="item-desc">Dos bolas de gelato artesanal: elección de vainilla, chocolate o café.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -150,36 +307,92 @@
         <section class="menu-category alternate-bg">
             <div class="parallax-header" style="background-image: url('https://images.pexels.com/photos/4109504/pexels-photo-4109504.jpeg?auto=compress&cs=tinysrgb&w=1440&q=80');">
                 <div class="overlay"></div>
-                <div class="category-title-box">
+                <div class="category-title-box reveal">
                     <h2 class="font-display">Alimentos</h2>
                 </div>
             </div>
+            
             <div class="menu-list-container">
-                <div class="container menu-items">
-                    <div class="menu-item">
+                <div class="container menu-items reveal">
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Tostada de Aguacate</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$95</span>
                         </div>
                         <p class="item-desc">Pan de masa madre artesanal con aguacate triturado y huevo pochado.</p>
-                    </div>
-                    <div class="menu-item">
+                    </article>
+                    
+                    <article class="menu-item">
                         <div class="item-header">
                             <h3 class="font-display">Sándwich Rústico</h3>
                             <div class="leader-dots"></div>
                             <span class="font-accent price">$110</span>
                         </div>
                         <p class="item-desc">Jamón serrano, queso provolone y rúcula fresca en pan ciabatta.</p>
-                    </div>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Panini de Pollo</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$105</span>
+                        </div>
+                        <p class="item-desc">Pechuga de pollo a la plancha, pesto de albahaca y queso gouda.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Bagel de Salmón</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$125</span>
+                        </div>
+                        <p class="item-desc">Salmón ahumado, crema de queso, alcaparras y cebolla morada.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Ensalada César</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$90</span>
+                        </div>
+                        <p class="item-desc">Lechuga romana fresca, crutones, parmesano y aderezo especial.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Quiche de Espinacas</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$85</span>
+                        </div>
+                        <p class="item-desc">Tarta salada rellena de espinacas, ricotta y un toque de nuez moscada.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Croissant de Jamón y Queso</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$75</span>
+                        </div>
+                        <p class="item-desc">Croissant de mantequilla relleno de jamón serrano y queso suizo.</p>
+                    </article>
+
+                    <article class="menu-item">
+                        <div class="item-header">
+                            <h3 class="font-display">Bowl de Frutas</h3>
+                            <div class="leader-dots"></div>
+                            <span class="font-accent price">$65</span>
+                        </div>
+                        <p class="item-desc">Mezcla de frutas de temporada con miel de abeja y granola artesanal.</p>
+                    </article>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="menu-footer">
-        <div class="container">
-            <div class="font-display footer-logo">Café Rústico</div>
+        <div class="container reveal">
+            <div class="footer-logo font-display">Café Rústico</div>
             <p class="footer-tagline">
                 Compartiendo el arte del café desde 2024. Cada visita es una nueva historia por descubrir.
             </p>
@@ -187,21 +400,16 @@
                 <i data-lucide="home"></i>
                 <span>Volver al Inicio</span>
             </a>
-            <div class="footer-copy">
+            <p class="footer-copy">
                 &copy; 2026 Café Rústico. Todos los derechos reservados.
-            </div>
+            </p>
         </div>
     </footer>
 
-    <a href="https://wa.me/527211001122" class="whatsapp-float animate-pulse-wa" target="_blank" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-        </svg>
+    <a href="https://wa.me/527211001122" class="whatsapp-float animate-pulse-wa" target="_blank" rel="noopener noreferrer" aria-label="Chat en WhatsApp">
+        <i data-lucide="message-circle"></i>
     </a>
 
-    <script>
-        lucide.createIcons();
-    </script>
-
+    <script src="js/main.js"></script>
 </body>
 </html>
