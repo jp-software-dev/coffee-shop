@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. ANIMACIONES FLUIDAS
+    // 3. ANIMACIONES FLUIDAS (Scroll reveal)
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -36,12 +36,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.reveal, .slide-in-right').forEach(el => observer.observe(el));
 
-    // 4. LÓGICA DE RESERVAS
+    // 4. LÓGICA DE FILTROS PARA EL MENÚ (Con animaciones y Accesibilidad)
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const menuCards = document.querySelectorAll('.menu-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Manejo Visual y Accesibilidad (aria-pressed)
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
+            
+            const filter = btn.getAttribute('data-filter');
+
+            // Filtrado de las tarjetas
+            menuCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                card.classList.remove('fade-in');
+                
+                if (filter === 'all' || category === filter) {
+                    card.classList.remove('hidden');
+                    void card.offsetWidth; // Forzar reflow para reiniciar CSS animation
+                    card.classList.add('fade-in');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // 5. LÓGICA DE RESERVAS CON UX/FEEDBACK VISUAL
     const bookingForm = document.getElementById('bookingForm');
     const fechaInput = document.getElementById('fecha');
 
     if (fechaInput) {
-        // Establecer fecha mínima a hoy
+        // Establecer fecha mínima a hoy para evitar reservas pasadas
         const today = new Date().toISOString().split('T')[0];
         fechaInput.setAttribute('min', today);
     }
@@ -53,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const fields = ['nombre', 'email', 'telefono', 'personas', 'fecha', 'hora'];
             let isValid = true;
 
+            // Validación básica de campos vacíos
             fields.forEach(fieldId => {
                 const input = document.getElementById(fieldId);
                 if (!input.value) {
@@ -64,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!isValid) return;
 
+            // Recopilar Datos
             const data = {
                 nombre: document.getElementById('nombre').value,
                 email: document.getElementById('email').value,
@@ -84,11 +118,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 `💬 *Mensaje:* ${data.mensaje}`;
 
             const waUrl = `https://wa.me/527211001122?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(waUrl, '_blank');
+            
+            // Lógica de Feedback (Mejora de UX)
+            const btnSubmit = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('form-success-msg');
+
+            btnSubmit.disabled = true;
+            btnSubmit.style.opacity = '0.5';
+            successMsg.style.display = 'block';
+
+            // Pequeña pausa antes de abrir WhatsApp para que el usuario procese el mensaje
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+                
+                // Restaurar formulario a su estado original
+                bookingForm.reset();
+                btnSubmit.disabled = false;
+                btnSubmit.style.opacity = '1';
+                successMsg.style.display = 'none';
+            }, 1500);
         });
     }
 
-    // 5. INTEGRACIÓN DEL MAPA GENERAL DE CDMX (Sin pin específico)
+    // 6. INTEGRACIÓN DEL MAPA GENERAL DE CDMX (Performance: inyección limpia)
     const mapContainer = document.getElementById('map');
     
     if (mapContainer && mapContainer.children.length === 0) {
