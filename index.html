@@ -22,8 +22,9 @@
             
             <ul class="nav-links" id="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#menu">Menú</a></li>
+                <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Menú</a></li>
                 <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#reservas">Reservas</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
 
@@ -44,178 +45,92 @@
                 <p class="slogan">Café Rústico — Est. 2024</p>
                 <p>Cafetería de especialidad urbana con alma rústica. Descubre la armonía perfecta entre el aroma artesanal y la sofisticación moderna.</p>
                 <div class="hero-btns">
-                    <a href="#menu" class="btn btn-primary">Ver nuestro menú</a>
-                    <a href="#ubicacion" class="btn btn-outline">Encuéntranos</a>
+                    <a href="menu.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ver nuestro menú</a>
+                    <a href="#reservas" class="btn btn-outline">Reserva ahora</a>
                 </div>
             </div>
         </section>
 
-        <section id="menu" class="section section-menu">
-            <div class="container">
-                <h2 class="section-title reveal">Nuestro Menú</h2>
-                <p class="section-subtitle reveal">Specialty Selection</p>
-
-                <div class="filter-container reveal">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="cafes">Cafés</button>
-                    <button class="filter-btn" data-filter="frias">Bebidas Frías</button>
-                    <button class="filter-btn" data-filter="postres">Postres</button>
-                    <button class="filter-btn" data-filter="alimentos">Alimentos</button>
+        <section id="reservas" class="section section-reservas reveal">
+            <div class="houndstooth-bg"></div>
+            
+            <div class="container relative z-1">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Reserva tu Mesa</h2>
+                    <p class="section-subtitle">Vive la Experiencia</p>
                 </div>
 
-                <div class="menu-grid">
-                    <article class="menu-card reveal" data-category="cafes">
-                        <span class="category-badge">Specialty</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/36179806/pexels-photo-36179806.jpeg" alt="Americano">
+                <div class="reservation-card">
+                    <div class="card-image-side">
+                        <div class="badge-est">
+                            <i data-lucide="coffee"></i>
+                            <span>Est. 2024</span>
                         </div>
-                        <div class="card-content">
-                            <h3>Americano</h3>
-                            <p>Blend de la casa con notas achocolatadas y cuerpo balanceado.</p>
-                            <div class="card-footer">
-                                <span class="price">$45</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="menu-card reveal reveal-delay-1" data-category="cafes">
-                        <span class="category-badge">Specialty</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/575278/pexels-photo-575278.jpeg" alt="Cappuccino">
-                        </div>
-                        <div class="card-content">
-                            <h3>Cappuccino</h3>
-                            <p>Doble shot de espresso con leche cremosa y microespuma sedosa.</p>
-                            <div class="card-footer">
-                                <span class="price">$65</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="menu-card reveal reveal-delay-2" data-category="cafes">
-                        <span class="category-badge">Specialty</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/5567628/pexels-photo-5567628.jpeg" alt="Latte de Vainilla">
-                        </div>
-                        <div class="card-content">
-                            <h3>Latte de Vainilla</h3>
-                            <p>Infusión artesanal de vainilla orgánica y leche seleccionada.</p>
-                            <div class="card-footer">
-                                <span class="price">$70</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="menu-card reveal" data-category="cafes">
-                        <span class="category-badge">Iced</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/4307385/pexels-photo-4307385.jpeg" alt="Frappé de Caramelo">
-                        </div>
-                        <div class="card-content">
-                            <h3>Frappé de Caramelo</h3>
-                            <p>Textura terciopelo con caramelo salado y crema batida premium.</p>
-                            <div class="card-footer">
-                                <span class="price">$75</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="menu-card reveal reveal-delay-1" data-category="frias">
-                        <span class="category-badge">Cold Brew</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/1141626/pexels-photo-1141626.jpeg" alt="Té Frío de Durazno">
-                        </div>
-                        <div class="card-content">
-                            <h3>Té Frío de Durazno</h3>
-                            <p>Hojas de té seleccionadas con esencia natural de durazno.</p>
-                            <div class="card-footer">
-                                <span class="price">$55</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="menu-card reveal reveal-delay-2" data-category="frias">
-                        <span class="category-badge">Refreshing</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/5668215/pexels-photo-5668215.jpeg" alt="Limonada con Menta">
-                        </div>
-                        <div class="card-content">
-                            <h3>Limonada con Menta</h3>
-                            <p>Cítricos frescos con menta orgánica de nuestro huerto.</p>
-                            <div class="card-footer">
-                                <span class="price">$50</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="menu-card reveal" data-category="postres">
-                        <span class="category-badge">Gourmet</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/827513/pexels-photo-827513.jpeg" alt="Cheesecake de Frutos Rojos">
-                        </div>
-                        <div class="card-content">
-                            <h3>Cheesecake</h3>
-                            <p>Base crocante con coulis de frutos rojos silvestres.</p>
-                            <div class="card-footer">
-                                <span class="price">$80</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="menu-card reveal reveal-delay-1" data-category="postres">
-                        <span class="category-badge">Gourmet</span>
-                        <div class="card-img">
-                            <img src="https://images.pexels.com/photos/9500627/pexels-photo-9500627.jpeg" alt="Brownie con Helado">
-                        </div>
-                        <div class="card-content">
-                            <h3>Brownie Supreme</h3>
-                            <p>Chocolate belga al 70% servido con gelato de vainilla.</p>
-                            <div class="card-footer">
-                                <span class="price">$75</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="ubicacion" class="section section-location">
-            <div class="container">
-                <h2 class="section-title reveal">Nuestra Ubicación</h2>
-                <p class="section-subtitle reveal">Visítanos en el corazón de la ciudad</p>
-
-                <div class="location-grid">
-                    <div class="map-wrapper reveal">
-                        <div class="map-container" id="map"></div>
+                        <img src="https://images.unsplash.com/photo-1517466832364-a428140f1b7d?auto=format&w=800&q=80&fit=crop" alt="Ambiente rústico de Café Rústico" loading="lazy">
+                        <svg class="wave-divider" viewBox="0 0 100 1000" preserveAspectRatio="none">
+                            <path d="M0,0 Q60,250 0,500 T0,1000 L100,1000 L100,0 Z" />
+                        </svg>
                     </div>
 
-                    <div class="location-cards">
-                        <div class="info-card slide-in-right">
-                            <div class="icon-box"><i data-lucide="map-pin"></i></div>
-                            <div class="info-content">
-                                <h4>Dirección</h4>
-                                <p>Av. Principal #123, Colonia Centro,<br>Ciudad de México.</p>
+                    <div class="reservation-form-side">
+                        <form id="bookingForm" class="booking-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="nombre">Nombre Completo</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre..." required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="email">Correo Electrónico</label>
+                                    <input type="email" id="email" name="email" class="form-input" placeholder="tu@email.com" required>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="info-card slide-in-right">
-                            <div class="icon-box"><i data-lucide="clock"></i></div>
-                            <div class="info-content">
-                                <h4>Horario de Atención</h4>
-                                <p>Lunes a Viernes: 9:00 AM - 8:00 PM<br>
-                                Sábado: 9:00 AM - 2:00 PM<br>
-                                <span class="highlight-text">DOMINGO: CERRADO</span></p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="telefono">Teléfono</label>
+                                    <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="Solo números" pattern="[0-9]*" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="personas">Número de Personas</label>
+                                    <select id="personas" name="personas" class="form-input" required>
+                                        <option value="" disabled selected>Selecciona...</option>
+                                        <option value="1">1 Persona</option>
+                                        <option value="2">2 Personas</option>
+                                        <option value="3">3 Personas</option>
+                                        <option value="4">4 Personas</option>
+                                        <option value="5">5 Personas</option>
+                                        <option value="6">6 Personas</option>
+                                        <option value="7+">7+ Personas</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="info-card slide-in-right">
-                            <div class="icon-box"><i data-lucide="phone"></i></div>
-                            <div class="info-content">
-                                <h4>Contacto</h4>
-                                <p>Tel: +52 7211 00 1122<br>
-                                Email: contacto@tudominio.com</p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="fecha">Fecha</label>
+                                    <input type="date" id="fecha" name="fecha" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="hora">Hora</label>
+                                    <input type="time" id="hora" name="hora" class="form-input" min="09:00" max="20:00" required>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="mensaje">Mensaje Especial / Comentarios</label>
+                                <textarea id="mensaje" name="mensaje" class="form-input min-h-[80px] resize-none" placeholder="Opcional..."></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary btn-submit">
+                                    <i data-lucide="message-circle"></i>
+                                    Confirmar por WhatsApp
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -245,11 +160,11 @@
                 <div class="footer-col">
                     <h5>MENÚ</h5>
                     <ul class="footer-links">
-                        <li><a href="#menu">Americano</a></li>
-                        <li><a href="#menu">Cappuccino</a></li>
-                        <li><a href="#menu">Latte de Vainilla</a></li>
-                        <li><a href="#menu">Frappé de Caramelo</a></li>
-                        <li><a href="#menu">Postres Gourmet</a></li>
+                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Americano</a></li>
+                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Cappuccino</a></li>
+                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Latte de Vainilla</a></li>
+                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Frappé de Caramelo</a></li>
+                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Postres Gourmet</a></li>
                     </ul>
                 </div>
 
@@ -257,8 +172,9 @@
                     <h5>NAVEGACIÓN</h5>
                     <ul class="footer-links">
                         <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#menu">Menú</a></li>
+                        <li><a href="menu.html" target="_blank" rel="noopener noreferrer">Menú</a></li>
                         <li><a href="#ubicacion">Ubicación</a></li>
+                        <li><a href="#reservas">Reservas</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
