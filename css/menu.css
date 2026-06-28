@@ -1,6 +1,6 @@
-/* menu.css - Estilos específicos para el diseño rústico del menú */
-
 /* 1. NAVBAR STANDALONE */
+
+/* Contenedor principal de navegación, lo mantiene fijo en la parte superior con un efecto de cristal (blur) */
 .menu-nav {
     position: sticky;
     top: 0;
@@ -13,12 +13,14 @@
     padding: 1.25rem 0;
 }
 
+/* Alinea los elementos internos de la barra de navegación a los extremos */
 .menu-nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* Estilo del botón o enlace para regresar, define color, tipografía y espacio */
 .back-link {
     display: flex;
     align-items: center;
@@ -31,16 +33,19 @@
     transition: var(--transition-smooth);
 }
 
+/* Dimensiones del ícono dentro del enlace de regreso y su tiempo de transición */
 .back-link i {
     width: 18px;
     height: 18px;
     transition: transform 0.3s ease;
 }
 
+/* Efecto de desplazamiento a la izquierda al pasar el cursor sobre el enlace de regreso */
 .back-link:hover i {
     transform: translateX(-4px);
 }
 
+/* Agrupación y alineación del logotipo o nombre de la marca en el menú */
 .menu-brand {
     display: flex;
     align-items: center;
@@ -48,28 +53,34 @@
     color: var(--color-primary);
 }
 
+/* Dimensiones del ícono de la marca */
 .menu-brand i {
     width: 24px;
     height: 24px;
 }
 
+/* Estilo de la tipografía para el nombre de la marca */
 .menu-brand span {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.01em;
 }
 
+/* Espaciador invisible para equilibrar el diseño en la barra de navegación */
 .nav-spacer {
     width: 140px;
 }
 
 /* 2. HEADER */
+
+/* Contenedor principal de la cabecera, define el espaciado interior y color de fondo */
 .menu-header {
     padding: 6rem 0 5rem;
     text-align: center;
     background-color: var(--color-bg-light);
 }
 
+/* Estilo del título principal de la cabecera, tamaño grande en itálica */
 .menu-header h1 {
     font-size: 4.5rem;
     line-height: 1;
@@ -79,12 +90,14 @@
     text-transform: lowercase;
 }
 
+/* Alineación central para el ícono separador decorativo */
 .divider-icon {
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
 }
 
+/* Apariencia del ícono separador, aplicando opacidad y filtros de color sepia */
 .divider-icon img {
     width: 2.5rem;
     height: 2.5rem;
@@ -92,6 +105,7 @@
     filter: sepia(1) saturate(5) hue-rotate(-20deg);
 }
 
+/* Estilo del texto descriptivo debajo del título principal, controla el ancho máximo y color */
 .header-desc {
     color: var(--color-text-muted);
     font-size: 1.125rem;
@@ -102,10 +116,13 @@
 }
 
 /* 3. CATEGORY SECTIONS */
+
+/* Contenedor relativo que envuelve cada categoría del menú para posicionar elementos internos */
 .menu-category {
     position: relative;
 }
 
+/* Cabecera de la categoría con imagen de fondo fija para lograr un efecto parallax */
 .parallax-header {
     height: 400px;
     display: flex;
@@ -119,6 +136,7 @@
     background-color: var(--color-primary); /* Dark fallback */
 }
 
+/* Capa oscura semitransparente sobre la imagen del parallax para mejorar la legibilidad */
 .parallax-header .overlay {
     position: absolute;
     inset: 0;
@@ -126,6 +144,7 @@
     z-index: 1;
 }
 
+/* Caja del título de la categoría que sobresale del parallax, oculta por defecto para su animación */
 .category-title-box {
     position: absolute;
     bottom: -30px;
@@ -142,20 +161,24 @@
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Clase que activa la visibilidad y posición final de la caja del título (efecto reveal) */
 .category-title-box.active {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
 
 /* Initial state for reveal-like effect without overriding translateX */
+/* Estado inicial de la caja del título, desplazada hacia abajo antes de aparecer */
 .category-title-box:not(.active) {
     transform: translateX(-50%) translateY(30px);
 }
 
+/* Color de fondo alternativo para la caja del título dependiendo del tema o sección */
 .alternate-bg .category-title-box {
     background-color: rgba(250, 246, 240, 0.98);
 }
 
+/* Estilo del texto del título dentro de la caja de categoría */
 .category-title-box h2 {
     font-size: 2.75rem;
     font-weight: 700;
@@ -164,16 +187,19 @@
     letter-spacing: -0.02em;
 }
 
+/* Contenedor que agrupa la lista de elementos del menú, con fondo blanco por defecto */
 .menu-list-container {
     background-color: #fff;
     border-bottom: 1px solid var(--color-border);
     padding: 5rem 0;
 }
 
+/* Cambia el fondo del contenedor de la lista si la sección usa el tema alternativo */
 .alternate-bg .menu-list-container {
     background-color: var(--color-bg-light);
 }
 
+/* Contenedor en columna para los platillos/productos, establece el espacio entre ellos */
 .menu-items {
     max-width: 800px;
     display: flex;
@@ -181,16 +207,19 @@
     gap: 3.5rem;
 }
 
+/* Define que cada producto ocupe el ancho completo de su contenedor */
 .menu-item {
     width: 100%;
 }
 
+/* Fila que contiene el nombre del producto, los puntos separadores y el precio */
 .item-header {
     display: flex;
     align-items: flex-end;
     gap: 0.75rem;
 }
 
+/* Estilo del nombre del producto o platillo */
 .item-header h3 {
     font-size: 1.85rem;
     font-weight: 700;
@@ -198,17 +227,20 @@
     margin: 0;
 }
 
+/* Línea punteada que conecta el nombre del producto con su precio */
 .leader-dots {
     flex-grow: 1;
     border-bottom: 2px dotted rgba(212, 163, 115, 0.4);
     margin-bottom: 0.5rem;
 }
 
+/* Estilo y color destacado para el precio del producto */
 .item-header .price {
     font-size: 1.85rem;
     color: var(--color-accent);
 }
 
+/* Descripción del producto, mostrada en itálica con un color tenue */
 .item-desc {
     color: var(--color-text-muted);
     margin-top: 0.65rem;
@@ -219,6 +251,8 @@
 }
 
 /* 4. FOOTER */
+
+/* Contenedor principal del pie de página, establece colores invertidos y texto centrado */
 .menu-footer {
     background-color: var(--color-primary);
     color: var(--color-bg-light);
@@ -226,12 +260,14 @@
     text-align: center;
 }
 
+/* Tipografía grande y en negrita para el logotipo dentro del pie de página */
 .footer-logo {
     font-size: 2.75rem;
     font-weight: 700;
     margin-bottom: 1.25rem;
 }
 
+/* Estilo del eslogan o pequeña descripción del pie de página */
 .footer-tagline {
     color: #BCAAA4;
     font-size: 1rem;
@@ -243,6 +279,7 @@
     font-weight: 300;
 }
 
+/* Botón o enlace para regresar al inicio desde el pie de página, incluye espaciado e ícono */
 .footer-home-link {
     display: inline-flex;
     align-items: center;
@@ -255,16 +292,19 @@
     transition: var(--transition-smooth);
 }
 
+/* Dimensiones del ícono dentro del enlace de inicio del pie de página */
 .footer-home-link i {
     width: 18px;
     height: 18px;
 }
 
+/* Efecto hover del enlace de inicio: cambia el color a claro y lo desplaza ligeramente hacia arriba */
 .footer-home-link:hover {
     color: var(--color-bg-light);
     transform: translateY(-2px);
 }
 
+/* Estilos de los derechos de autor (copyright), texto pequeño con línea separadora superior */
 .footer-copy {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -275,16 +315,20 @@
 }
 
 /* 5. WHATSAPP PULSE */
+
+/* Fotogramas clave para crear una animación de pulsación de sombra simulando latido */
 @keyframes pulse-wa {
     0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
     70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
     100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
+/* Clase de utilidad para aplicar la animación de pulsación infinita */
 .animate-pulse-wa {
     animation: pulse-wa 2s infinite;
 }
 
+/* Botón flotante de WhatsApp, lo fija en la esquina inferior derecha con formato circular */
 .whatsapp-float {
     position: fixed;
     bottom: 2.5rem;
@@ -302,32 +346,45 @@
     transition: var(--transition-smooth);
 }
 
+/* Tamaño del ícono de WhatsApp dentro del botón flotante */
 .whatsapp-float i {
     width: 32px;
     height: 32px;
 }
 
+/* Efecto hover para el botón de WhatsApp, lo hace más grande y lo rota levemente */
 .whatsapp-float:hover {
     transform: scale(1.1) rotate(5deg);
 }
 
 /* 6. RESPONSIVE */
+
+/* Adaptaciones para tabletas y pantallas medianas (hasta 992px) */
 @media (max-width: 992px) {
+    /* Reduce el tamaño del título principal de la cabecera */
     .menu-header h1 { font-size: 3.75rem; }
+    /* Ajusta el relleno lateral de las cajas de título de categoría */
     .category-title-box { padding: 1.5rem 3.5rem; }
 }
 
+/* Adaptaciones para teléfonos móviles (hasta 768px) */
 @media (max-width: 768px) {
+    /* Disminuye aún más el tamaño del título principal para pantallas pequeñas */
     .menu-header h1 { font-size: 3rem; }
+    /* Ajusta el relleno y tamaño de texto de la caja de título de categoría */
     .category-title-box { padding: 1.25rem 2.5rem; }
     .category-title-box h2 { font-size: 2.25rem; }
     /* Mobile compatibility for parallax */
+    /* Desactiva el efecto parallax fijo y reduce la altura de la imagen en móviles para evitar bugs de scroll */
     .parallax-header { 
         height: 320px; 
         background-attachment: scroll; 
         background-position: center;
     }
+    /* Reduce el espaciado entre los productos del menú */
     .menu-items { gap: 2.5rem; }
+    /* Oculta elementos que tienen esta clase específica en dispositivos móviles */
     .hide-mobile { display: none; }
+    /* Reduce el relleno superior e inferior de la barra de navegación */
     .menu-nav { padding: 1rem 0; }
 }

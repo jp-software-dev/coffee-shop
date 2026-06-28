@@ -1,5 +1,12 @@
+/* TIPOGRAFÍAS */
+
+/* Importa las fuentes externas utilizadas en el proyecto desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=DM+Sans:wght@300;400;700&family=Italiana&display=swap');
 
+
+/* VARIABLES GLOBALES */
+
+/* Define la paleta de colores, fuentes y efectos globales para mantener consistencia */
 :root {
     --color-primary:       #3E2723;
     --color-secondary:     #D4A373;
@@ -10,140 +17,706 @@
     --color-text-dark:     #2D1A11;
     --color-text-muted:    #795C4D;
     --color-border:        #E6D5C3;
-    /* Nuevo color de apoyo para estados/feedback (Verde Sage) */
     --color-success-sage:  #2F6B4F;
-
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'DM Sans', sans-serif;
     --font-accent: 'Italiana', serif;
-
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-soft: 0 8px 24px rgba(62, 39, 35, 0.08);
 }
 
+
+/* RESET Y ESTILOS BASE */
+
+/* Resetea los márgenes, rellenos y el modelo de caja en todos los elementos */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Habilita el desplazamiento suave en toda la página */
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background-color: var(--color-bg-light); color: var(--color-text-dark); line-height: 1.6; overflow-x: hidden; }
-h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 700; }
-a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
-ul { list-style: none; }
-img { max-width: 100%; display: block; }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.section { padding: 100px 0; }
-.section-title { text-align: center; font-size: 3.5rem; margin-bottom: 0.5rem; color: var(--color-primary); }
-.section-subtitle { text-align: center; color: var(--color-text-muted); margin-bottom: 4rem; font-size: 1.2rem; font-family: var(--font-accent); text-transform: uppercase; letter-spacing: 2px; }
-
-/* NAVBAR */
-.navbar { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 25px 0; transition: var(--transition-smooth); }
-.navbar.scrolled { background-color: var(--color-primary); padding: 15px 0; box-shadow: var(--shadow-soft); }
-/* Cuando el menú mobile está desplegado, el navbar adopta el fondo sólido aunque no haya scroll, para evitar que se mezcle visualmente con el hero */
-.navbar.menu-open { background-color: var(--color-primary); }
-.navbar .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { display: flex; align-items: center; gap: 12px; }
-.logo span { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--color-text-light); }
-.nav-links { display: flex; gap: 35px; }
-.nav-links a { color: var(--color-text-light); font-weight: 500; font-size: 0.95rem; letter-spacing: 1px; }
-.nav-links a:hover { color: var(--color-secondary); }
-
-/* Accesibilidad: Reset para button de toggle */
-.mobile-toggle { 
-    display: none; 
-    cursor: pointer; 
-    color: var(--color-text-light); 
-    font-size: 1.5rem; 
-    background: transparent; 
-    border: none; 
+/* Configura la fuente principal, color de fondo, texto y oculta el desbordamiento horizontal */
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
+/* Aplica la tipografía decorativa y grosor en negrita a todos los encabezados */
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+/* Elimina el subrayado de los enlaces y aplica una transición suave para estados hover */
+a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
+
+/* Quita las viñetas por defecto de las listas HTML */
+ul { list-style: none; }
+
+/* Asegura que las imágenes no desborden sus contenedores y se comporten como bloques */
+img { max-width: 100%; display: block; }
+
+
+/* UTILIDADES */
+
+/* Contenedor central principal que restringe el ancho máximo y añade márgenes laterales */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Añade espaciado superior e inferior para separar cada sección de la página */
+.section { padding: 100px 0; }
+
+/* Formatea los títulos principales de cada sección, centrándolos y asignando color */
+.section-title {
+    text-align: center;
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+}
+
+/* Da estilo de tipografía decorativa y espaciado a los subtítulos de las secciones */
+.section-subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-bottom: 4rem;
+    font-size: 1.2rem;
+    font-family: var(--font-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+/* NAVBAR */
+
+/* Fija la barra de navegación en la parte superior y la sobrepone al resto del contenido */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 25px 0;
+    transition: var(--transition-smooth);
+}
+
+/* Cambia el fondo, reduce el relleno y añade sombra a la barra al hacer scroll */
+.navbar.scrolled {
+    background-color: var(--color-primary);
+    padding: 15px 0;
+    box-shadow: var(--shadow-soft);
+}
+
+/* Mantiene el fondo oscuro cuando el menú móvil está desplegado */
+.navbar.menu-open { background-color: var(--color-primary); }
+
+/* Distribuye el logotipo y la lista de navegación en extremos opuestos */
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Agrupa el ícono y el texto del logotipo de forma horizontal */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Aplica la fuente decorativa y tamaño grande al nombre del logotipo */
+.logo span {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-text-light);
+}
+
+/* Organiza los enlaces de navegación en línea con espaciado entre ellos */
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+/* Establece el tamaño, grosor y color claro a los enlaces del menú principal */
+.nav-links a {
+    color: var(--color-text-light);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+/* Cambia el color del enlace de navegación a un tono dorado al pasar el cursor */
+.nav-links a:hover { color: var(--color-secondary); }
+
+/* Oculta por defecto el botón tipo hamburguesa en pantallas de escritorio */
+.mobile-toggle {
+    display: none;
+    cursor: pointer;
+    color: var(--color-text-light);
+    font-size: 1.5rem;
+    background: transparent;
+    border: none;
+}
+
+
 /* HERO */
-.hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-text-light); position: relative; overflow: hidden; }
-.hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(62, 39, 35, 0.5), rgba(62, 39, 35, 0.8)); z-index: -1; }
-.hero-content { max-width: 900px; z-index: 1; padding-top: 100px; }
-.hero h1 { font-size: 5rem; line-height: 1.1; margin-bottom: 1.5rem; }
-.hero .slogan { font-family: var(--font-accent); font-size: 2.2rem; color: var(--color-secondary); margin-bottom: 1.5rem; }
-.hero p { font-size: 1.25rem; margin-bottom: 3rem; font-weight: 300; opacity: 0.9; }
-.hero-btns { display: flex; gap: 20px; justify-content: center; }
-.btn { padding: 16px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 1rem; display: inline-block; transition: var(--transition-smooth); }
-.btn-primary { background-color: var(--color-secondary); color: var(--color-primary); border: none; }
-.btn-primary:hover { background-color: #C08D5D; transform: translateY(-2px); }
-.btn-outline { background-color: transparent; color: var(--color-text-light); border: 2px solid var(--color-text-light); }
-.btn-outline:hover { background-color: var(--color-text-light); color: var(--color-primary); }
 
-/* Icono SVG de WhatsApp embebido en botones de texto (alineado con el texto del botón) */
-.wa-icon-inline { vertical-align: -3px; margin-right: 6px; }
+/* Configura la sección principal para cubrir toda la pantalla verticalmente */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-text-light);
+    position: relative;
+    overflow: hidden;
+}
 
-/* MENÚ GRID */
+/* Posiciona el video de fondo en la capa más profunda, cubriendo toda el área */
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* Agrega un degradado oscuro semitransparente sobre el video para mejorar la lectura */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(62, 39, 35, 0.5), rgba(62, 39, 35, 0.8));
+    z-index: -1;
+}
+
+/* Contiene el texto y botones principales, colocándolos encima de los fondos */
+.hero-content {
+    max-width: 900px;
+    z-index: 1;
+    padding-top: 100px;
+}
+
+/* Ajusta el título de bienvenida a un tamaño muy grande */
+.hero h1 {
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+/* Aplica estilo decorativo cursivo y color dorado al eslogan de la marca */
+.hero .slogan {
+    font-family: var(--font-accent);
+    font-size: 2.2rem;
+    color: var(--color-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Define la tipografía fina y semi transparente para la descripción de portada */
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Centra los botones de acción y los separa ligeramente de forma horizontal */
+.hero-btns {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+/* BOTONES */
+
+/* Configura la estructura base, relleno, curvatura y animaciones de cualquier botón */
+.btn {
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-block;
+    transition: var(--transition-smooth);
+}
+
+/* Estilo para el botón principal con fondo sólido y texto oscuro */
+.btn-primary {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: none;
+}
+
+/* Oscurece el botón principal y lo desplaza sutilmente hacia arriba al interactuar */
+.btn-primary:hover {
+    background-color: #C08D5D;
+    transform: translateY(-2px);
+}
+
+/* Estilo para botones secundarios, sin fondo y con un contorno de línea clara */
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-text-light);
+    border: 2px solid var(--color-text-light);
+}
+
+/* Invierte los colores del botón con contorno al pasar el cursor (fondo claro, texto oscuro) */
+.btn-outline:hover {
+    background-color: var(--color-text-light);
+    color: var(--color-primary);
+}
+
+/* Ajusta la alineación del ícono de WhatsApp dentro de un botón para que cuadre con el texto */
+.wa-icon-inline {
+    vertical-align: -3px;
+    margin-right: 6px;
+}
+
+
+/* MENÚ (grid de productos) */
+
+/* Aplica un color de fondo claro exclusivo para la sección completa del menú */
 .section-menu { background-color: var(--color-bg-light); }
-.filter-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 3rem; flex-wrap: wrap; }
-.filter-btn { padding: 10px 25px; border: 1px solid var(--color-border); background: var(--color-text-light); color: var(--color-text-muted); border-radius: 50px; cursor: pointer; font-weight: 600; font-family: var(--font-body); transition: var(--transition-smooth); }
+
+/* Centra y agrupa los botones utilizados para filtrar los platillos */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+/* Formato tipo píldora para los botones de filtrado (estado inactivo) */
+.filter-btn {
+    padding: 10px 25px;
+    border: 1px solid var(--color-border);
+    background: var(--color-text-light);
+    color: var(--color-text-muted);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: var(--font-body);
+    transition: var(--transition-smooth);
+}
+
+/* Oscurece muy ligeramente el fondo del filtro inactivo al hacer hover */
 .filter-btn:hover { background-color: var(--color-surface); }
-.filter-btn.active { background-color: var(--color-primary); color: var(--color-text-light); border-color: var(--color-primary); }
 
-/* Accesibilidad teclado */
-.filter-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+/* Cambia a fondo oscuro para destacar la categoría actualmente seleccionada */
+.filter-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border-color: var(--color-primary);
+}
 
-.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-.menu-card { background-color: var(--color-text-light); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-soft); position: relative; border-top: 4px solid transparent; transition: opacity 0.3s ease, transform 0.3s ease; }
-.menu-card:hover { border-top-color: var(--color-secondary); transform: translateY(-8px); }
-.card-img { height: 250px; overflow: hidden; }
-.card-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
+/* Añade un anillo de enfoque accesible si el usuario navega los filtros con teclado */
+.filter-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+/* Crea una cuadrícula responsiva para las tarjetas de menú, adaptándose al ancho disponible */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Define el estilo de la tarjeta individual de cada producto, con sombras y esquinas redondeadas */
+.menu-card {
+    background-color: var(--color-text-light);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    border-top: 4px solid transparent;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Muestra un borde dorado superior y eleva la tarjeta al pasar el cursor */
+.menu-card:hover {
+    border-top-color: var(--color-secondary);
+    transform: translateY(-8px);
+}
+
+/* Contenedor que limita la altura de la foto del producto y esconde el desbordamiento */
+.card-img {
+    height: 250px;
+    overflow: hidden;
+}
+
+/* Hace que la imagen del producto cubra su espacio completamente sin deformarse */
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+/* Genera un sutil efecto de acercamiento (zoom) en la imagen de la tarjeta al hacer hover */
 .menu-card:hover .card-img img { transform: scale(1.08); }
-.category-badge { position: absolute; background-color: var(--color-accent); color: var(--color-text-light); top: 15px; right: 15px; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 5; }
 
-/* Nuevo Badge Sage */
+/* Estiliza la pequeña etiqueta flotante (badge) que va sobre la imagen indicando el tipo de producto */
+.category-badge {
+    position: absolute;
+    background-color: var(--color-accent);
+    color: var(--color-text-light);
+    top: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 5;
+}
+
+/* Cambia el color del badge a verde para destacar productos específicos (ej. vegano/saludable) */
 .badge-sage { background-color: var(--color-success-sage); }
 
+/* Añade espaciado interno al contenedor que aloja el texto dentro de la tarjeta */
 .card-content { padding: 25px; }
-.card-content h3 { color: var(--color-primary); font-size: 1.4rem; margin-bottom: 8px; }
-.card-content p { color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 15px; min-height: 45px; }
-.card-footer { display: flex; justify-content: space-between; align-items: center; }
-.price { color: var(--color-accent); font-weight: 700; font-size: 1.3rem; }
+
+/* Da tamaño y color oscuro al título/nombre del platillo en el menú */
+.card-content h3 {
+    color: var(--color-primary);
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+/* Estiliza la descripción del producto, asegurando que ocupe una altura mínima por diseño */
+.card-content p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    min-height: 45px;
+}
+
+/* Separa horizontalmente el precio y cualquier otro elemento inferior de la tarjeta */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Destaca el precio del producto haciéndolo grande y con un tono rojizo/tierra */
+.price {
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+/* Clase auxiliar utilizada por JavaScript para ocultar los productos al usar los filtros */
 .menu-card.hidden { display: none !important; }
 
-/* TESTIMONIOS (NUEVA PRUEBA SOCIAL) */
+
+/* TESTIMONIOS */
+
+/* Cambia el fondo a un tono ligeramente más cálido para separar la sección de testimonios */
 .section-testimonials { background-color: var(--color-surface); }
-.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-.testimonial-card { background-color: var(--color-text-light); padding: 35px 25px; border-radius: 16px; text-align: center; box-shadow: var(--shadow-soft); transition: var(--transition-smooth); }
+
+/* Distribuye las tarjetas de opiniones en un layout de tres columnas equitativas */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Da formato de caja blanca y centro al contenido de cada opinión de usuario */
+.testimonial-card {
+    background-color: var(--color-text-light);
+    padding: 35px 25px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+/* Eleva la tarjeta del testimonio cuando el usuario le pasa el cursor por encima */
 .testimonial-card:hover { transform: translateY(-5px); }
-.testimonial-card .stars { color: var(--color-secondary); margin-bottom: 15px; font-size: 1.1rem; }
-.testimonial-card p { color: var(--color-text-muted); font-style: italic; font-size: 1rem; margin-bottom: 20px; line-height: 1.6; }
-.testimonial-card h4 { font-family: var(--font-accent); color: var(--color-primary); font-size: 1.2rem; }
+
+/* Pinta las estrellas de calificación con el tono dorado principal */
+.testimonial-card .stars {
+    color: var(--color-secondary);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* Formatea el texto de la reseña en cursiva y con interlineado holgado para facilitar lectura */
+.testimonial-card p {
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Usa la tipografía decorativa para firmar con el nombre del cliente */
+.testimonial-card h4 {
+    font-family: var(--font-accent);
+    color: var(--color-primary);
+    font-size: 1.2rem;
+}
+
 
 /* UBICACIÓN */
-.section-location { background-color: var(--color-bg-light); padding-top: 100px; padding-bottom: 100px; }
-.location-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: center; background: transparent; padding: 0; box-shadow: none; }
-.map-wrapper { height: 100%; min-height: 400px; border-radius: 16px; overflow: hidden; border: 4px solid var(--color-text-light); box-shadow: var(--shadow-soft); }
+
+/* Amplía el espaciado y aplica el color de fondo claro para la sección de mapa y contacto */
+.section-location {
+    background-color: var(--color-bg-light);
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+/* Divide el contenido en dos columnas: el mapa ocupa más espacio (1.2) que la info (1) */
+.location-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    align-items: center;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+/* Envuelve el iframe del mapa, otorgándole altura, bordes redondeados y un marco grueso */
+.map-wrapper {
+    height: 100%;
+    min-height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 4px solid var(--color-text-light);
+    box-shadow: var(--shadow-soft);
+}
+
+/* Asegura que el contenedor interno del mapa llene todo su envoltorio */
 .map-container { height: 100%; width: 100%; }
-.location-cards { display: flex; flex-direction: column; gap: 15px; }
-.info-card { background-color: var(--color-text-light); color: var(--color-text-dark); padding: 30px 25px; border-radius: 16px; display: flex; align-items: center; gap: 20px; transition: transform 0.3s ease; box-shadow: var(--shadow-soft); }
+
+/* Apila las tarjetas de información (dirección, teléfono, horarios) una sobre otra */
+.location-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Define el recuadro blanco para cada bloque individual de información de contacto */
+.info-card {
+    background-color: var(--color-text-light);
+    color: var(--color-text-dark);
+    padding: 30px 25px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-soft);
+}
+
+/* Desplaza ligeramente la tarjeta de información hacia la izquierda de forma interactiva */
 .info-card:hover { transform: translateX(-5px); }
-.icon-box { color: var(--color-accent); border: 1px solid var(--color-border); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--color-bg-light); }
-.info-content h4 { font-family: var(--font-body); color: var(--color-primary); margin-bottom: 5px; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
-.info-content p { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.5; }
-.highlight-text { color: var(--color-accent); font-size: 0.8rem; letter-spacing: 1px; font-weight: 700; margin-top: 5px; display: inline-block; text-transform: uppercase; }
+
+/* Crea un pequeño contenedor cuadrado con bordes para alojar el ícono de contacto */
+.icon-box {
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--color-bg-light);
+}
+
+/* Estiliza los subtítulos de las tarjetas (Ej. "Nuestra Dirección", "Horarios") */
+.info-content h4 {
+    font-family: var(--font-body);
+    color: var(--color-primary);
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Formato para el texto general descriptivo dentro de las tarjetas de ubicación */
+.info-content p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Etiqueta resaltada que se muestra debajo del texto (Ej. "ABIERTO AHORA") */
+.highlight-text {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-top: 5px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
 
 /* RESERVAS */
-.section-reservas { position: relative; background-color: var(--color-bg-light); overflow: hidden; }
-.houndstooth-bg { background-image: url('https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/hound.svg'); background-size: 100px; opacity: 0.03; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; filter: sepia(1) saturate(2); }
-.reservation-card { background: var(--color-text-light); border-radius: 16px; box-shadow: var(--shadow-soft); overflow: hidden; display: flex; max-width: 1100px; margin: 0 auto; }
-.card-image-side { width: 40%; position: relative; overflow: hidden; background-color: var(--color-primary); }
-.card-image-side img { width: 100%; height: 100%; object-fit: cover; }
-.wave-divider { position: absolute; top: 0; right: -1px; height: 100%; width: 60px; fill: var(--color-text-light); transform: rotate(180deg); }
-.reservation-form-side { width: 60%; padding: 60px; }
-.booking-form { display: flex; flex-direction: column; gap: 25px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.form-group { position: relative; display: flex; flex-direction: column; }
-.form-label { display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-text-muted); margin-bottom: 8px; }
-.form-input { width: 100%; background: transparent; border: none; border-bottom: 2px solid var(--color-border); padding: 10px 0; color: var(--color-text-dark); font-family: var(--font-body); font-size: 1rem; transition: var(--transition-smooth); outline: none; }
+
+/* Prepara la sección de reservas para poder ubicar decoraciones de fondo absolutas */
+.section-reservas {
+    position: relative;
+    background-color: var(--color-bg-light);
+    overflow: hidden;
+}
+
+/* Añade una textura sutil e invisible con forma de patrones al fondo de la sección */
+.houndstooth-bg {
+    background-image: url('https://cdn.jsdelivr.net/npm/game-icons-transparent@latest/svgs/lorc/hound.svg');
+    background-size: 100px;
+    opacity: 0.03;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    filter: sepia(1) saturate(2);
+}
+
+/* Contenedor principal que une visualmente la imagen promocional y el formulario web */
+.reservation-card {
+    background: var(--color-text-light);
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Reserva un 40% del ancho del bloque para incrustar una fotografía de fondo */
+.card-image-side {
+    width: 40%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-primary);
+}
+
+/* Hace que la foto cubra todo su espacio vertical sin deformarse */
+.card-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* SVG posicionado absolutamente que simula un corte de "onda" entre la imagen y el formulario */
+.wave-divider {
+    position: absolute;
+    top: 0;
+    right: -1px;
+    height: 100%;
+    width: 60px;
+    fill: var(--color-text-light);
+    transform: rotate(180deg);
+}
+
+/* Reserva el 60% del espacio restante para colocar el formulario de llenado */
+.reservation-form-side {
+    width: 60%;
+    padding: 60px;
+}
+
+/* Dispone los elementos del formulario verticalmente con una separación holgada */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Configura una fila que dividirá visualmente dos entradas (inputs) mitad y mitad */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Contenedor relativo para estructurar de manera limpia cada etiqueta e input emparejados */
+.form-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Formatea el texto de las etiquetas del formulario para hacerlas pequeñas y mayúsculas */
+.form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+}
+
+/* Da a los campos de texto un estilo limpio eliminando recuadros, dejando solo la línea base */
+.form-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--color-border);
+    padding: 10px 0;
+    color: var(--color-text-dark);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+/* Pinta la línea inferior de color dorado para resaltar qué campo se está llenando */
 .form-input:focus { border-bottom-color: var(--color-secondary); }
-.form-input::placeholder { color: #BCAAA4; font-size: 0.9rem; }
-.form-actions { margin-top: 10px; display: flex; justify-content: flex-end; }
 
-.badge-est { position: absolute; top: 30px; left: 30px; background: rgba(62, 39, 35, 0.8); backdrop-filter: blur(4px); color: var(--color-secondary); padding: 10px 20px; border-radius: 50px; font-family: var(--font-accent); font-size: 0.9rem; display: flex; align-items: center; gap: 8px; z-index: 2; }
+/* Cambia ligeramente el tono del texto de sugerencia interno del campo (placeholder) */
+.form-input::placeholder {
+    color: #BCAAA4;
+    font-size: 0.9rem;
+}
 
-/* Feedback de Reserva (Verde Sage) */
+/* Alinea el botón de envío a la derecha dentro de su contenedor base */
+.form-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Estiliza una etiqueta flotante de marca incrustada visualmente sobre la imagen lateral */
+.badge-est {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: rgba(62, 39, 35, 0.8);
+    backdrop-filter: blur(4px);
+    color: var(--color-secondary);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: var(--font-accent);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+/* Oculta por defecto y da fondo verde a la alerta temporal cuando la reserva tiene éxito */
 .success-feedback {
     display: none;
     background-color: var(--color-success-sage);
@@ -156,78 +729,235 @@ img { max-width: 100%; display: block; }
     width: 100%;
 }
 
-/* FOOTER Y CONTACTO */
-.footer { background-color: var(--color-primary); color: var(--color-text-light); padding: 80px 0 60px; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; }
-.footer-brand h2 { font-family: var(--font-display); color: var(--color-text-light); font-size: 2.2rem; margin-bottom: 15px; }
-.footer-brand p { color: #BCAAA4; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.6; max-width: 90%; }
-.social-links { display: flex; gap: 12px; }
-.social-circle { width: 40px; height: 40px; border-radius: 50%; background-color: transparent; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; color: var(--color-text-light); transition: var(--transition-smooth); }
-.social-circle i { font-size: 1.2rem; }
-.social-circle:hover { border-color: var(--color-secondary); color: var(--color-secondary); transform: translateY(-3px); }
-.footer-col h5 { font-family: var(--font-body); color: var(--color-secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-weight: 700; }
-.footer-links li, .contact-info-list li { margin-bottom: 15px; }
-.footer-links a, .contact-info-list li { color: #BCAAA4; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transition: var(--transition-smooth); }
-.footer-links a:hover { color: var(--color-secondary); transform: translateX(5px); }
-.contact-info-list i { color: var(--color-secondary); width: 18px; height: 18px; }
 
-/* RESPONSIVE */
-@media screen and (max-width: 992px) {
-    .section { padding: 80px 0; }
-    .location-grid { grid-template-columns: 1fr; gap: 40px; }
-    .map-wrapper { height: 350px; }
-    .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-    
-    .reservation-card { flex-direction: column; }
-    .card-image-side, .reservation-form-side { width: 100%; }
-    .card-image-side { height: 300px; }
-    .wave-divider { display: none; }
-    .reservation-form-side { padding: 40px 25px; }
+/* FOOTER */
 
-    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+/* Configura el fondo oscuro masivo y rellenos superiores para el pie de página global */
+.footer {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 80px 0 60px;
 }
 
+/* Divide la estructura del footer en cuatro columnas asimétricas mediante cuadrícula CSS */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+}
+
+/* Tipografía de tamaño grande y elegante reservada para el logo textual al final del sitio */
+.footer-brand h2 {
+    font-family: var(--font-display);
+    color: var(--color-text-light);
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+/* Configura el texto descriptivo del negocio justo debajo de la marca principal */
+.footer-brand p {
+    color: #BCAAA4;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+/* Agrupa en línea horizontal los distintos íconos para redes sociales */
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+/* Construye la forma circular con borde transparente que delimitará los íconos de redes */
+.social-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    transition: var(--transition-smooth);
+}
+
+/* Define el tamaño fijo interno para los logos de las redes (Ej. Facebook, Instagram) */
+.social-circle i { font-size: 1.2rem; }
+
+/* Cambia el color al pasar el cursor y anima un ligero salto del círculo hacia arriba */
+.social-circle:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    transform: translateY(-3px);
+}
+
+/* Aplica un formato de título claro y en mayúsculas a cada columna adicional (ej. "Enlaces") */
+.footer-col h5 {
+    font-family: var(--font-body);
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Asigna separación vertical entre los enlaces útiles y la información de contacto listada */
+.footer-links li,
+.contact-info-list li { margin-bottom: 15px; }
+
+/* Formatea genéricamente todo el texto interactivo de las últimas tres columnas */
+.footer-links a,
+.contact-info-list li {
+    color: #BCAAA4;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: var(--transition-smooth);
+}
+
+/* Cambia el color del enlace del footer y lo desliza suavemente hacia la derecha al interactuar */
+.footer-links a:hover {
+    color: var(--color-secondary);
+    transform: translateX(5px);
+}
+
+/* Da un color de acento y dimensiones específicas a los pequeños íconos de teléfono/dirección */
+.contact-info-list i {
+    color: var(--color-secondary);
+    width: 18px;
+    height: 18px;
+}
+
+
+/* RESPONSIVE */
+
+/* Tablet landscape (Dispositivos medianos, pantallas de hasta 992px) */
+@media screen and (max-width: 992px) {
+    /* Reduce la altura del padding de las secciones en general para ahorrar espacio */
+    .section { padding: 80px 0; }
+
+    /* Pasa el mapa de ubicación y su tarjeta descriptiva a una sola columna */
+    .location-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* Reduce la altura absoluta del mapa en estas resoluciones medias */
+    .map-wrapper { height: 350px; }
+
+    /* Modifica el pie de página para mostrarse en dos filas de dos columnas */
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    /* Rompe el diseño horizontal de reservas, forzando la imagen arriba del formulario */
+    .reservation-card { flex-direction: column; }
+    
+    /* Expande ambos bloques (imagen y formulario) para abarcar todo el espacio lateral disponible */
+    .card-image-side,
+    .reservation-form-side { width: 100%; }
+    
+    /* Recorta la altura de la imagen decorativa del formulario ahora que está apilada */
+    .card-image-side { height: 300px; }
+    
+    /* Elimina el efecto de onda divisoria, ya que no encaja visualmente con este modo vertical */
+    .wave-divider { display: none; }
+    
+    /* Acota los márgenes internos del recuadro del formulario */
+    .reservation-form-side { padding: 40px 25px; }
+
+    /* Ajusta la grilla de testimonios para distribuir las opiniones en sólo dos columnas */
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tablet portrait (Dispositivos pequeños y tablets verticales, hasta 768px) */
 @media screen and (max-width: 768px) {
+    /* Acorta el relleno vertical del menú fijo superior */
     .navbar { padding: 15px 0; }
-    .nav-links { 
-        display: none; 
-        flex-direction: column; 
-        position: absolute; 
-        top: 100%; 
-        left: 0; 
-        width: 100%; 
-        /* Fondo sólido (sin transparencia) para que el menú no se confunda con el video del hero detrás */
-        background-color: var(--color-primary); 
-        padding: 10px 20px 30px; 
-        text-align: center; 
-        gap: 0; 
-        /* Sombra propia para que el dropdown se perciba como una capa flotante sobre el contenido */
+
+    /* Esconde el menú de escritorio y lo posiciona absolutamente como cajón oculto desplegable */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-primary);
+        padding: 10px 20px 30px;
+        text-align: center;
+        gap: 0;
         box-shadow: var(--shadow-soft);
         border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
+
+    /* Clase enlazada con JavaScript para revelar el menú vertical escondido */
     .nav-links.mobile-active { display: flex; }
-    /* Cada link ocupa su propio renglón con separador sutil, en vez de quedar amontonados con gap fijo */
+
+    /* Obliga a los ítems del listado de menú a expandirse al 100% de la pantalla */
     .nav-links li { width: 100%; }
-    .nav-links a { 
-        display: block; 
-        padding: 18px 0; 
-        font-size: 1.05rem; 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+    
+    /* Transforma cada enlace en un bloque grande, fácil de tocar, y traza una fina línea inferior */
+    .nav-links a {
+        display: block;
+        padding: 18px 0;
+        font-size: 1.05rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
+
+    /* Borra el contorno divisor del último enlace de la lista para mantener la limpieza */
     .nav-links li:last-child a { border-bottom: none; }
+
+    /* Activa visualmente el botón (ícono de tres líneas) para desplegar el menú móvil */
     .mobile-toggle { display: block; }
+
+    /* Achica el encabezado masivo de la portada de inicio */
     .hero h1 { font-size: 3.5rem; }
+
+    /* Fuerza que cada fila del formulario contenga solo una entrada que ocupe todo el ancho */
     .form-row { grid-template-columns: 1fr; }
+
+    /* Apila por completo todos los testimonios en una columna única para facilitar el barrido */
     .testimonials-grid { grid-template-columns: 1fr; }
 }
 
+/* Mobile (Dispositivos móviles pequeños, pantallas de hasta 576px) */
 @media screen and (max-width: 576px) {
+    /* Reduce la tipografía genérica de los títulos de todas las secciones */
     .section-title { font-size: 2.5rem; }
+
+    /* Vuelve a disminuir el título frontal para no ocupar demasiadas líneas de la pantalla */
     .hero h1 { font-size: 2.5rem; }
+
+    /* Disminuye el tamaño de la fuente secundaria bajo el título base */
     .hero .slogan { font-size: 1.8rem; }
-    .hero-btns { flex-direction: column; padding: 0 20px; }
+
+    /* Alinea en formato de columna vertical los botones de acción iniciales de la pantalla */
+    .hero-btns {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    /* Expande los botones generales para utilizar absolutamente todo el ancho táctil que exista */
     .btn { width: 100%; }
-    /* Corrección: el footer en mobile se mantiene alineado a la izquierda (no centrado) */
-    .footer-grid { grid-template-columns: 1fr; text-align: left; }
-    .social-links, .footer-links a, .contact-info-list li { justify-content: flex-start; }
+
+    /* Reacomoda el enorme pie de página en una sola columna gigante alineando su texto al lado izquierdo */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    /* Sobrescribe justificaciones previas para apegar por completo a la izquierda las listas y logos */
+    .social-links,
+    .footer-links a,
+    .contact-info-list li {
+        justify-content: flex-start;
+    }
 }
