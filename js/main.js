@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.getElementById('nav-links');
     const links = document.querySelectorAll('.nav-links a');
 
-    /* Alterna el menú mobile: muestra/oculta el dropdown, cambia el ícono (menú <-> x) 
+    /* Alterna el menú mobile: muestra/oculta el dropdown, cambia el ícono (menú a x) 
        y fuerza el fondo sólido del navbar para que el dropdown no sea transparente sobre el hero */
     const toggleMobileMenu = () => {
         const isOpen = navLinks.classList.toggle('mobile-active');
@@ -117,12 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* 5. LÓGICA DE RESERVAS CON UX/FEEDBACK VISUAL */
+    /* 5. LÓGICA DE RESERVAS CON UX/FEEDBACK VISUAL Y PROTECCIÓN ANTI-BOTS */
     
     /* Obtiene las referencias del formulario y sus campos principales */
     const bookingForm = document.getElementById('bookingForm');
     const fechaInput = document.getElementById('fecha');
     const telefonoInput = document.getElementById('telefono');
+
+    /* TRAMPA DE TIEMPO: Registra el momento exacto en que se carga el script en el navegador del usuario */
+    const formLoadTime = new Date().getTime();
 
     /* Establece fecha mínima a hoy para evitar que los usuarios seleccionen días en el pasado */
     if (fechaInput) {
@@ -151,6 +154,23 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.addEventListener('submit', (e) => {
             /* Evita que la página se recargue al enviar los datos */
             e.preventDefault();
+
+            /* VALIDACIÓN HONEYPOT: Verifica si el campo invisible fue llenado por un bot */
+            const honeypot = document.getElementById('validacion_bot');
+            if (honeypot && honeypot.value !== '') {
+                console.warn('Bloqueo de seguridad: Actividad sospechosa detectada (Honeypot).');
+                return;
+            }
+
+            /* VALIDACIÓN TRAMPA DE TIEMPO: Calcula los segundos transcurridos desde que cargó la página */
+            const formSubmitTime = new Date().getTime();
+            const timeToFill = (formSubmitTime - formLoadTime) / 1000;
+            
+            /* Bloquea la ejecución si el formulario se llenó en menos de 3 segundos */
+            if (timeToFill < 3) {
+                console.warn('Bloqueo de seguridad: Formulario completado demasiado rápido.');
+                return;
+            }
             
             /* Lista de los campos que son obligatorios revisar */
             const fields = ['nombre', 'email', 'telefono', 'personas', 'fecha', 'hora'];
@@ -181,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => telefonoInput.classList.remove('input-error'), 400);
             }
 
-            /* Detiene la ejecución de la reserva si algún campo falló las validaciones */
+            /* Detiene la ejecución de la reserva si algún campo falló las validaciones visuales */
             if (!isValid) return;
 
             /* Recopilar Datos: Extrae los valores finales listos para ser enviados */
@@ -197,18 +217,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             /* Formatea los datos recopilados en un mensaje legible y estructurado para WhatsApp */
             const whatsappMessage = `Hola, quiero hacer una reservación:\n\n` +
-                `👤 *Nombre:* ${data.nombre}\n` +
-                `📧 *Correo:* ${data.email}\n` +
-                `📞 *Teléfono:* ${data.telefono}\n` +
-                `👥 *Personas:* ${data.personas}\n` +
-                `📅 *Fecha:* ${data.fecha}\n` +
-                `⏰ *Hora:* ${data.hora}\n` +
-                `💬 *Mensaje:* ${data.mensaje}`;
+                `*Nombre:* ${data.nombre}\n` +
+                `*Correo:* ${data.email}\n` +
+                `*Teléfono:* ${data.telefono}\n` +
+                `*Personas:* ${data.personas}\n` +
+                `*Fecha:* ${data.fecha}\n` +
+                `*Hora:* ${data.hora}\n` +
+                `*Mensaje:* ${data.mensaje}`;
 
             /* Genera la URL con el número de teléfono y el mensaje codificado */
             const waUrl = `https://wa.me/527211001122?text=${encodeURIComponent(whatsappMessage)}`;
             
-            /* Lógica de Feedback (Mejora de UX): Selecciona botón y mensaje de éxito */
+            /* Lógica de Feedback: Selecciona botón y mensaje de éxito */
             const btnSubmit = document.getElementById('submitBtn');
             const successMsg = document.getElementById('form-success-msg');
 
