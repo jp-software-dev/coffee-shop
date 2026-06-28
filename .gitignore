@@ -34,9 +34,6 @@ ehthumbs_vista.db
 Thumbs.db
 desktop.ini
 
-# Imagenes y videos
-public/
-
 # Editores e IDEs
 .vscode/*
 !.vscode/settings.json
