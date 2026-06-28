@@ -882,41 +882,67 @@ img { max-width: 100%; display: block; }
     /* Acorta el relleno vertical del menú fijo superior */
     .navbar { padding: 15px 0; }
 
-    /* Esconde el menú de escritorio y lo posiciona absolutamente como cajón oculto desplegable */
+    /* Esconde el menú a la derecha simulando un panel lateral fijo (off-canvas) */
     .nav-links {
-        display: none;
+        display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
         background-color: var(--color-primary);
-        padding: 10px 20px 30px;
-        text-align: center;
-        gap: 0;
-        box-shadow: var(--shadow-soft);
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 100px 40px;
+        text-align: left;
+        gap: 30px;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+        border-top: none;
+        transition: var(--transition-smooth);
+        z-index: 1000;
     }
 
-    /* Clase enlazada con JavaScript para revelar el menú vertical escondido */
-    .nav-links.mobile-active { display: flex; }
+    /* Clase enlazada con JavaScript para revelar el menú deslizando desde la derecha */
+    .nav-links.mobile-active { right: 0; }
 
-    /* Obliga a los ítems del listado de menú a expandirse al 100% de la pantalla */
-    .nav-links li { width: 100%; }
+    /* Ajusta el ancho de los ítems para no forzar el 100% de bloque */
+    .nav-links li { width: auto; }
     
-    /* Transforma cada enlace en un bloque grande, fácil de tocar, y traza una fina línea inferior */
+    /* Transforma los enlaces para alinearlos a la izquierda y preparar la línea decorativa */
     .nav-links a {
-        display: block;
-        padding: 18px 0;
-        font-size: 1.05rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: inline-block;
+        padding: 0 0 8px 0;
+        font-size: 1.1rem;
+        border-bottom: none;
+        position: relative;
     }
 
-    /* Borra el contorno divisor del último enlace de la lista para mantener la limpieza */
+    /* Borra cualquier línea por defecto heredada (opcional pero seguro) */
     .nav-links li:last-child a { border-bottom: none; }
 
-    /* Activa visualmente el botón (ícono de tres líneas) para desplegar el menú móvil */
-    .mobile-toggle { display: block; }
+    /* Crea la línea dorada oculta que simulará el subrayado elegante al estilo podólogo */
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-secondary);
+        transition: width 0.3s ease;
+    }
+
+    /* Despliega la línea dorada al interactuar o estar activo */
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+        width: 100%;
+    }
+
+    /* Activa visualmente el botón y asegura que quede por encima del panel lateral */
+    .mobile-toggle { 
+        display: block; 
+        z-index: 1001;
+        position: relative; 
+    }
 
     /* Achica el encabezado masivo de la portada de inicio */
     .hero h1 { font-size: 3.5rem; }
