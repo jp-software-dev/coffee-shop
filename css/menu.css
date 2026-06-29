@@ -371,9 +371,24 @@
 @media (max-width: 768px) {
     /* Disminuye aún más el tamaño del título principal para pantallas pequeñas */
     .menu-header h1 { font-size: 3rem; }
-    /* Ajusta el relleno y tamaño de texto de la caja de título de categoría */
-    .category-title-box { padding: 1.25rem 2.5rem; }
-    .category-title-box h2 { font-size: 2.25rem; }
+    
+    /* --- MEJORA RESPONSIVA CORREGIDA PARA LAS CAJAS DE TÍTULO --- */
+    .category-title-box { 
+        padding: 1.25rem 2rem; /* Relleno proporcionado para móviles */
+        width: max-content; /* Permite que la caja se adapte a su texto */
+        max-width: 90%; /* Pone un límite estricto: nunca rebasará los bordes de la pantalla */
+        white-space: normal; /* Elimina la restricción de una sola línea */
+        box-sizing: border-box; /* Asegura que el padding no engorde la caja más allá del 90% */
+        text-align: center; 
+        /* Nota: NO tocamos position, left ni transform. El centrado se hereda intacto de arriba. */
+    }
+    
+    .category-title-box h2 { 
+        font-size: 2.15rem; /* Ajuste sutil del tamaño de fuente */
+        word-wrap: break-word; 
+    }
+    /* ------------------------------------------------------------- */
+
     /* Mobile compatibility for parallax */
     /* Desactiva el efecto parallax fijo y reduce la altura de la imagen en móviles para evitar bugs de scroll */
     .parallax-header { 
