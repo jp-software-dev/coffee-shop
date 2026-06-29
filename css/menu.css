@@ -372,19 +372,19 @@
     /* Disminuye aún más el tamaño del título principal para pantallas pequeñas */
     .menu-header h1 { font-size: 3rem; }
     
-    /* --- MEJORA RESPONSIVA CORREGIDA PARA LAS CAJAS DE TÍTULO --- */
+    /* --- MEJORA RESPONSIVA DEFINITIVA PARA LAS CAJAS DE TÍTULO --- */
     .category-title-box { 
-        padding: 1.25rem 2rem; /* Relleno proporcionado para móviles */
-        width: max-content; /* Permite que la caja se adapte a su texto */
-        max-width: 90%; /* Pone un límite estricto: nunca rebasará los bordes de la pantalla */
-        white-space: normal; /* Elimina la restricción de una sola línea */
-        box-sizing: border-box; /* Asegura que el padding no engorde la caja más allá del 90% */
+        padding: 1.25rem 1.5rem; 
+        width: -moz-fit-content; /* Soporte para Firefox */
+        width: fit-content; /* Se ajusta al texto para palabras cortas (Alimentos) */
+        max-width: 260px; /* Límite en px para obligar a palabras largas (Bebidas Frías) a bajar de línea sin salirse */
+        white-space: normal; /* Permite el salto de línea */
+        box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
         text-align: center; 
-        /* Nota: NO tocamos position, left ni transform. El centrado se hereda intacto de arriba. */
     }
     
     .category-title-box h2 { 
-        font-size: 2.15rem; /* Ajuste sutil del tamaño de fuente */
+        font-size: 2rem; /* Tamaño ligeramente ajustado para móviles */
         word-wrap: break-word; 
     }
     /* ------------------------------------------------------------- */
