@@ -31,16 +31,26 @@
 /* Resetea los márgenes, rellenos y el modelo de caja en todos los elementos */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Habilita el desplazamiento suave en toda la página */
-html { scroll-behavior: smooth; }
+/* Habilita el desplazamiento suave y bloquea el desbordamiento horizontal desde la raíz (Fix iOS) */
+html { 
+    scroll-behavior: smooth; 
+    overflow-x: hidden; 
+    width: 100%;
+    /* Previene el zoom accidental al tocar dos veces rápido en iOS */
+    touch-action: manipulation;
+}
 
-/* Configura la fuente principal, color de fondo, texto y oculta el desbordamiento horizontal */
+/* Configura la fuente principal, color de fondo, texto y bloquea estrictamente el desbordamiento */
 body {
     font-family: var(--font-body);
     background-color: var(--color-bg-light);
     color: var(--color-text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    /* Evita que los elementos absolutos rompan el contenedor en móviles */
+    max-width: 100vw;
 }
 
 /* Aplica la tipografía decorativa y grosor en negrita a todos los encabezados */
