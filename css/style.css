@@ -111,7 +111,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* Mantiene el fondo oscuro cuando el menú móvil está desplegado */
-.navbar.menu-open { background-color: var(--color-primary); }
+.navbar.menu-open { background-color: rgba(62, 39, 35, 0.85); }
 
 /* Distribuye el logotipo y la lista de navegación en extremos opuestos */
 .navbar .container {
@@ -882,65 +882,92 @@ img { max-width: 100%; display: block; }
     /* Acorta el relleno vertical del menú fijo superior */
     .navbar { padding: 15px 0; }
 
-    /* Esconde el menú a la derecha simulando un panel lateral fijo (off-canvas) */
+    /* SOLUCIÓN 1: El logo debe tener un z-index MENOR que el panel lateral para no sobreponerse */
+    .logo {
+        position: relative;
+        z-index: 1000;
+    }
+
+    /* Panel lateral derecho que ocupa solo el 60% del ancho */
     .nav-links {
         display: flex;
         flex-direction: column;
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 280px;
+        right: -60%; /* Oculto fuera de la pantalla a la derecha */
+        left: auto; /* Reinicia el valor left por si se heredó */
+        width: 60%; /* Solo el 60% del ancho de la pantalla */
         height: 100vh;
-        background-color: var(--color-primary);
-        padding: 100px 40px;
+        background-color: rgba(62, 39, 35, 0.98); 
+        justify-content: flex-start; /* Alinea hacia arriba */
+        align-items: flex-start; /* Alinea los enlaces a la izquierda dentro del panel */
+        padding: 100px 30px; /* Reduje el padding lateral un poco para dar más espacio a las líneas largas */
         text-align: left;
-        gap: 30px;
-        box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+        gap: 15px; /* Reducimos el gap base porque el padding interno de cada <a> dará el espacio real */
+        z-index: 1005; /* MAYOR que el logo (1000) para cubrirlo perfectamente */
+        
+        /* Animación de deslizamiento */
+        opacity: 1; 
+        visibility: visible;
+        transition: right 0.4s ease-in-out;
         border-top: none;
-        transition: var(--transition-smooth);
-        z-index: 1000;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.3);
     }
 
     /* Clase enlazada con JavaScript para revelar el menú deslizando desde la derecha */
-    .nav-links.mobile-active { right: 0; }
+    .nav-links.mobile-active { 
+        right: 0; 
+    }
 
-    /* Ajusta el ancho de los ítems para no forzar el 100% de bloque */
-    .nav-links li { width: auto; }
+    /* Ajusta el ancho de los ítems de la lista para que ocupen todo el ancho disponible del menú */
+    .nav-links li { width: 100%; }
     
-    /* Transforma los enlaces para alinearlos a la izquierda y preparar la línea decorativa */
+    /* SOLUCIÓN 2: Diseño Podología - Enlaces en bloque, texto limpio y línea súper larga */
     .nav-links a {
-        display: inline-block;
-        padding: 0 0 8px 0;
-        font-size: 1.1rem;
+        display: block; /* Obliga al enlace a usar el 100% de la columna */
+        width: 100%;
+        padding: 15px 0; /* Padding amplio para facilitar toque en móviles y espaciar opciones */
+        font-family: var(--font-body); /* Tipografía Sans-serif limpia y clínica */
+        font-size: 1.25rem; /* Tamaño más estético y controlado */
+        font-weight: 400; /* Letra más delgada */
+        color: var(--color-surface); /* Color inactivo suave */
+        letter-spacing: 1.5px; /* Espaciado premium entre letras */
         border-bottom: none;
         position: relative;
+        transition: color 0.3s ease;
+    }
+
+    /* Color activo de la pestaña seleccionada o hover */
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: var(--color-secondary); /* Dorado */
     }
 
     /* Borra cualquier línea por defecto heredada (opcional pero seguro) */
     .nav-links li:last-child a { border-bottom: none; }
 
-    /* Crea la línea dorada oculta que simulará el subrayado elegante al estilo podólogo */
+    /* Crea la línea dorada delgada que simulará el borde inferior moderno */
     .nav-links a::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 0;
         width: 0;
-        height: 2px;
+        height: 1px; /* Línea estilizada súper fina de 1px */
         background-color: var(--color-secondary);
         transition: width 0.3s ease;
     }
 
-    /* Despliega la línea dorada al interactuar o estar activo */
+    /* Despliega la línea dorada. Al estar el <a> en display: block, ocupará todo el ancho de la barra */
     .nav-links a:hover::after,
     .nav-links a.active::after {
         width: 100%;
     }
 
-    /* Activa visualmente el botón y asegura que quede por encima del panel lateral */
+    /* Activa visualmente el botón y asegura que quede por encima de absolutamente todo */
     .mobile-toggle { 
         display: block; 
-        z-index: 1001;
+        z-index: 1010; /* MAYOR que el nav-links (1005) para asegurar el cierre (X) */
         position: relative; 
     }
 

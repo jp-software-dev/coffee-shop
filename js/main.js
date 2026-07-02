@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) navbar.classList.add('scrolled');
         else navbar.classList.remove('scrolled');
+        
+        /* Cierra el menú móvil al navegar (hacer scroll hacia arriba o abajo) */
+        if (navLinks && navLinks.classList.contains('mobile-active')) {
+            closeMobileMenu();
+        }
     }, { passive: true });
 
     /* Selecciona los elementos del menú móvil: el botón, el contenedor de enlaces y los enlaces individuales */
@@ -26,8 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.getElementById('nav-links');
     const links = document.querySelectorAll('.nav-links a');
 
-    /* Alterna el menú mobile: muestra/oculta el dropdown, cambia el ícono (menú a x) 
-       y fuerza el fondo sólido del navbar para que el dropdown no sea transparente sobre el hero */
+    /* Alterna el menú mobile: muestra/oculta el dropdown y cambia el ícono (menú a x) */
     const toggleMobileMenu = () => {
         const isOpen = navLinks.classList.toggle('mobile-active');
         navbar.classList.toggle('menu-open', isOpen);
@@ -40,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    /* Fuerza el cierre del menú móvil y reinicia sus íconos y atributos de accesibilidad a su estado original */
+    /* Fuerza el cierre del menú móvil y reinicia sus íconos a su estado original */
     const closeMobileMenu = () => {
         navLinks.classList.remove('mobile-active');
         navbar.classList.remove('menu-open');
@@ -226,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `*Mensaje:* ${data.mensaje}`;
 
             /* Genera la URL con el número de teléfono y el mensaje codificado */
-            const waUrl = `https://wa.me/527211001122?text=${encodeURIComponent(whatsappMessage)}`;
+            const waUrl = `https://wa.me/527298369274?text=${encodeURIComponent(whatsappMessage)}`;
             
             /* Lógica de Feedback: Selecciona botón y mensaje de éxito */
             const btnSubmit = document.getElementById('submitBtn');
