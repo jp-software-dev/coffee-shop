@@ -215,7 +215,7 @@
 /* Fila que contiene el nombre del producto, los puntos separadores y el precio */
 .item-header {
     display: flex;
-    align-items: flex-end;
+    align-items: baseline; /* CORRECCIÓN: Alinea por línea base para precios uniformes */
     gap: 0.75rem;
 }
 
@@ -248,6 +248,8 @@
     font-style: italic;
     font-size: 1.05rem;
     max-width: 90%;
+    /* MEJORA: Altura mínima para estandarizar el espacio vertical aunque la descripción sea corta */
+    min-height: 3.2rem; 
 }
 
 /* 4. FOOTER */
@@ -309,9 +311,10 @@
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 0.75rem;
-    color: rgba(188, 170, 164, 0.4);
-    letter-spacing: 0.05em;
+    color: #BCAAA4; /* Estandarización de color */
+    font-size: 0.8rem; /* Aumento de tamaño para coincidir */
+    text-transform: uppercase; /* Transformación a mayúsculas */
+    letter-spacing: 3px; /* Aumento de espaciado para coincidir */
 }
 
 /* 5. WHATSAPP PULSE */
