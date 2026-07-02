@@ -842,6 +842,22 @@ img { max-width: 100%; display: block; }
     height: 18px;
 }
 
+/* --- BARRA DE DERECHOS RESERVADOS --- */
+.footer-bottom {
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Línea separadora muy sutil */
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #BCAAA4; /* Mismo tono apagado y elegante del resto del texto secundario */
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px; /* Espaciado amplio para imitar el diseño de referencia */
+}
+
 
 /* RESPONSIVE */
 
