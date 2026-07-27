@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reseñas y opiniones de nuestra comunidad - Café Rústico. Descubre lo que dicen nuestros clientes sobre la experiencia.">
+
+    <!-- SEO Básico y Open Graph -->
+    <title>Reseñas | Café Rústico</title>
+    <meta property="og:title" content="Café Rústico | Nuestra Comunidad">
+    <meta property="og:description" content="Lo que dicen de nosotros nuestros clientes.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1517466832364-a428140f1b7d?auto=format&w=1200&q=80&fit=crop">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="icon" type="image/x-icon" href="public/cafe_icono.ico">
+
+    <!-- Íconos (Lucide anclado a versión fija para seguridad y FontAwesome) -->
+    <script src="https://unpkg.com/lucide@0.344.0" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i data-lucide="coffee" style="color: white; width: 30px; height: 30px;"></i>
+                <span>Café Rústico</span>
+            </a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="index.html#reservas">Reservas</a></li>
+                <li><a href="comunidad.html">Reseñas</a></li>
+                <li><a href="index.html#ubicacion">Ubicación</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+
+            <!-- Accesibilidad: Convertido de div a button real -->
+            <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de navegación">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- SECCIÓN: PRUEBA SOCIAL / TESTIMONIOS (movida desde index.html) -->
+        <section id="testimonios" class="section section-testimonials reveal">
+            <div class="container">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Nuestra Comunidad</h2>
+                    <p class="section-subtitle">Lo que dicen de nosotros</p>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-right quote-icon" aria-hidden="true"></i>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>"El mejor americano de la zona centro. El ambiente es perfecto para trabajar o venir en pareja. El diseño rústico te atrapa desde que entras."</p>
+                        <div class="testimonial-author">
+                            <h4>Valeria M.</h4>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-right quote-icon" aria-hidden="true"></i>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>"Me encantó el Frappé de Caramelo. Hacer la reservación fue súper rápido por WhatsApp. Excelente atención y la comida de primera."</p>
+                        <div class="testimonial-author">
+                            <h4>Roberto G.</h4>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-right quote-icon" aria-hidden="true"></i>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p>"Los postres Gourmet son una delicia, sobre todo el Cheesecake. Ideal para una cita relajada el fin de semana."</p>
+                        <div class="testimonial-author">
+                            <h4>Ana P.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <h2>Café Rústico</h2>
+                    <p>Cafetería especializada en café de origen.<br>Comprometidos con la excelencia artesanal y la calidad en cada taza.</p>
+
+                    <div class="social-links">
+                        <a href="#" class="social-circle" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-circle" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/527298369274" class="social-circle" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5>MENÚ</h5>
+                    <ul class="footer-links">
+                        <li><a href="menu.html">Americano</a></li>
+                        <li><a href="menu.html">Cappuccino</a></li>
+                        <li><a href="menu.html">Latte de Vainilla</a></li>
+                        <li><a href="menu.html">Frappé de Caramelo</a></li>
+                        <li><a href="menu.html">Postres Gourmet</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>NAVEGACIÓN</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html#inicio">Inicio</a></li>
+                        <li><a href="menu.html">Menú</a></li>
+                        <li><a href="index.html#reservas">Reservas</a></li>
+                        <li><a href="comunidad.html">Reseñas</a></li>
+                        <li><a href="index.html#ubicacion">Ubicación</a></li>
+                        <li><a href="index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>CONTACTO</h5>
+                    <ul class="contact-info-list">
+                        <li><i data-lucide="map-pin"></i> Ciudad de México</li>
+                        <li><i data-lucide="phone"></i> +52 729 836 9274</li>
+                        <li><i data-lucide="mail"></i> contacto@tudominio.com</li>
+                        <li><i data-lucide="clock"></i> Lunes a Viernes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- BARRA DE DERECHOS RESERVADOS -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 CAFÉ RÚSTICO. TODOS LOS DERECHOS RESERVADOS.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <a href="https://wa.me/527298369274" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat en WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+        </svg>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

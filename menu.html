@@ -11,23 +11,30 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="icon" type="image/x-icon" href="public/cafe_icono.ico">
     <script src="https://unpkg.com/lucide@0.344.0"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- NAVBAR STANDALONE -->
-    <nav class="menu-nav">
-        <div class="container menu-nav-container reveal">
-            <a href="index.html" class="back-link group">
-                <i data-lucide="arrow-left"></i>
-                <span>Volver al inicio</span>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i data-lucide="coffee" style="color: white; width: 30px; height: 30px;"></i>
+                <span>Café Rústico</span>
             </a>
-            
-            <div class="menu-brand">
-                <i data-lucide="coffee"></i>
-                <span class="font-display">Café Rústico</span>
-            </div>
-            
-            <div class="nav-spacer hide-mobile"></div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="index.html#reservas">Reservas</a></li>
+                <li><a href="comunidad.html">Reseñas</a></li>
+                <li><a href="index.html#ubicacion">Ubicación</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+
+            <!-- Accesibilidad: Convertido de div a button real -->
+            <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú de navegación">
+                <i data-lucide="menu"></i>
+            </button>
         </div>
     </nav>
 
@@ -390,19 +397,66 @@
         </section>
     </main>
 
-    <footer class="menu-footer">
-        <div class="container reveal">
-            <div class="footer-logo font-display">Café Rústico</div>
-            <p class="footer-tagline">
-                Compartiendo el arte del café desde 2024. Cada visita es una nueva historia por descubrir.
-            </p>
-            <a href="index.html" class="footer-home-link">
-                <i data-lucide="home"></i>
-                <span>Volver al Inicio</span>
-            </a>
-            <p class="footer-copy">
-                &copy; 2026 Café Rústico. Todos los derechos reservados.
-            </p>
+    <!-- FOOTER -->
+    <footer id="contacto" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <h2>Café Rústico</h2>
+                    <p>Cafetería especializada en café de origen.<br>Comprometidos con la excelencia artesanal y la calidad en cada taza.</p>
+
+                    <div class="social-links">
+                        <a href="#" class="social-circle" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-circle" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/527298369274" class="social-circle" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h5>MENÚ</h5>
+                    <ul class="footer-links">
+                        <li><a href="menu.html">Americano</a></li>
+                        <li><a href="menu.html">Cappuccino</a></li>
+                        <li><a href="menu.html">Latte de Vainilla</a></li>
+                        <li><a href="menu.html">Frappé de Caramelo</a></li>
+                        <li><a href="menu.html">Postres Gourmet</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>NAVEGACIÓN</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html#inicio">Inicio</a></li>
+                        <li><a href="menu.html">Menú</a></li>
+                        <li><a href="index.html#reservas">Reservas</a></li>
+                        <li><a href="comunidad.html">Reseñas</a></li>
+                        <li><a href="index.html#ubicacion">Ubicación</a></li>
+                        <li><a href="index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>CONTACTO</h5>
+                    <ul class="contact-info-list">
+                        <li><i data-lucide="map-pin"></i> Ciudad de México</li>
+                        <li><i data-lucide="phone"></i> +52 729 836 9274</li>
+                        <li><i data-lucide="mail"></i> contacto@tudominio.com</li>
+                        <li><i data-lucide="clock"></i> Lunes a Viernes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- BARRA DE DERECHOS RESERVADOS -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 CAFÉ RÚSTICO. TODOS LOS DERECHOS RESERVADOS.</p>
+            </div>
+
         </div>
     </footer>
 
