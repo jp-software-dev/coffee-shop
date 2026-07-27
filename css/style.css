@@ -125,7 +125,7 @@ img { max-width: 100%; display: block; }
     transition: var(--transition-smooth);
 }
 
-/* Excepción exclusiva de Menú: arranca transparente/invisible y se solidifica al hacer scroll (clase aplicada solo en menu.html) */
+/* Header dinámico: arranca transparente/invisible sobre el hero (video o imagen) y se solidifica al hacer scroll (usado en index.html y menu.html) */
 .navbar-dynamic {
     background-color: transparent;
     box-shadow: none;
