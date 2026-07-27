@@ -81,6 +81,16 @@ img { max-width: 100%; display: block; }
 /* Añade espaciado superior e inferior para separar cada sección de la página */
 .section { padding: 100px 0; }
 
+/* Utilidades genéricas de espaciado y alineación reutilizadas en varias secciones */
+.text-center { text-align: center; }
+.relative { position: relative; }
+.z-1 { z-index: 1; }
+.resize-none { resize: none; }
+.min-h-\[80px\] { min-height: 80px; }
+
+/* Separación amplia bajo los encabezados de sección para una jerarquía más aireada */
+.mb-16 { margin-bottom: 5rem; }
+
 /* Formatea los títulos principales de cada sección, centrándolos y asignando color */
 .section-title {
     text-align: center;
@@ -260,30 +270,36 @@ img { max-width: 100%; display: block; }
     transition: var(--transition-smooth);
 }
 
-/* Estilo para el botón principal con fondo sólido y texto oscuro */
+/* Estilo para el botón principal: degradado dorado sólido, texto oscuro y resplandor de énfasis (jerarquía #1) */
 .btn-primary {
-    background-color: var(--color-secondary);
+    background: linear-gradient(135deg, var(--color-secondary), #C08D5D);
     color: var(--color-primary);
     border: none;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(212, 163, 115, 0.3);
 }
 
-/* Oscurece el botón principal y lo desplaza sutilmente hacia arriba al interactuar */
+/* Intensifica el resplandor y eleva el botón principal al interactuar */
 .btn-primary:hover {
-    background-color: #C08D5D;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #C08D5D, var(--color-secondary));
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(212, 163, 115, 0.45);
 }
 
-/* Estilo para botones secundarios, sin fondo y con un contorno de línea clara */
+/* Estilo para el botón secundario: contorno fino y translúcido, deliberadamente más discreto (jerarquía #2) */
 .btn-outline {
     background-color: transparent;
     color: var(--color-text-light);
-    border: 2px solid var(--color-text-light);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    font-weight: 500;
 }
 
-/* Invierte los colores del botón con contorno al pasar el cursor (fondo claro, texto oscuro) */
+/* Rellena ligeramente el botón secundario y aclara su borde al pasar el cursor, sin competir con el primario */
 .btn-outline:hover {
-    background-color: var(--color-text-light);
-    color: var(--color-primary);
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-text-light);
+    color: var(--color-text-light);
+    transform: translateY(-3px);
 }
 
 /* Ajusta la alineación del ícono de WhatsApp dentro de un botón para que cuadre con el texto */
@@ -433,50 +449,101 @@ img { max-width: 100%; display: block; }
 
 /* TESTIMONIOS */
 
-/* Cambia el fondo a un tono ligeramente más cálido para separar la sección de testimonios */
-.section-testimonials { background-color: var(--color-surface); }
+/* Fondo oscuro tipo "espresso" para crear contraste premium frente a las secciones claras */
+.section-testimonials {
+    background: linear-gradient(160deg, var(--color-primary) 0%, #241512 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Textura sutil de viñeta radial dorada para dar profundidad sin distraer del contenido */
+.section-testimonials::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(212, 163, 115, 0.08), transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(212, 163, 115, 0.06), transparent 45%);
+    pointer-events: none;
+}
+
+/* Adapta los encabezados de la sección al fondo oscuro */
+.section-testimonials .section-title { color: var(--color-text-light); }
+.section-testimonials .section-subtitle { color: var(--color-secondary); }
 
 /* Distribuye las tarjetas de opiniones en un layout de tres columnas equitativas */
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Da formato de caja blanca y centro al contenido de cada opinión de usuario */
+/* Tarjeta premium tipo "glass" oscura, con borde dorado sutil y espacio para el ícono de comillas */
 .testimonial-card {
-    background-color: var(--color-text-light);
-    padding: 35px 25px;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: var(--shadow-soft);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(212, 163, 115, 0.18);
+    backdrop-filter: blur(6px);
+    padding: 45px 35px 35px;
+    border-radius: 20px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     transition: var(--transition-smooth);
 }
 
-/* Eleva la tarjeta del testimonio cuando el usuario le pasa el cursor por encima */
-.testimonial-card:hover { transform: translateY(-5px); }
+/* Eleva la tarjeta y resalta el borde dorado al pasar el cursor */
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 163, 115, 0.5);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+}
 
-/* Pinta las estrellas de calificación con el tono dorado principal */
+/* Ícono decorativo de comillas, grande y translúcido, como marca de agua en la esquina */
+.testimonial-card .quote-icon {
+    position: absolute;
+    top: 22px;
+    right: 28px;
+    font-size: 2.75rem;
+    color: var(--color-secondary);
+    opacity: 0.15;
+    z-index: 0;
+}
+
+/* Pinta las estrellas de calificación con el tono dorado principal, por encima del ícono de fondo */
 .testimonial-card .stars {
     color: var(--color-secondary);
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
-
-/* Formatea el texto de la reseña en cursiva y con interlineado holgado para facilitar lectura */
-.testimonial-card p {
-    color: var(--color-text-muted);
-    font-style: italic;
+    margin-bottom: 18px;
     font-size: 1rem;
-    margin-bottom: 20px;
-    line-height: 1.6;
+    position: relative;
+    z-index: 1;
 }
 
-/* Usa la tipografía decorativa para firmar con el nombre del cliente */
+/* Formatea el texto de la reseña en cursiva, claro sobre el fondo oscuro, con interlineado holgado */
+.testimonial-card p {
+    color: rgba(255, 255, 255, 0.85);
+    font-style: italic;
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+}
+
+/* Línea divisoria sutil que separa la reseña de la firma del cliente */
+.testimonial-author {
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Usa la tipografía decorativa dorada para firmar con el nombre del cliente */
 .testimonial-card h4 {
     font-family: var(--font-accent);
-    color: var(--color-primary);
-    font-size: 1.2rem;
+    color: var(--color-secondary);
+    font-weight: 400;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
 }
 
 
