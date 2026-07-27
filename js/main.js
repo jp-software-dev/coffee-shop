@@ -273,4 +273,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         mapContainer.appendChild(iframe);
     }
+
+    /* 7. FORMULARIO DEMO "AGREGAR RESEÑA" (Sin backend, solo interfaz) */
+
+    /* Referencias al botón que despliega el panel, al panel colapsable y al formulario interno */
+    const addReviewBtn = document.getElementById('addReviewBtn');
+    const addReviewPanel = document.getElementById('addReviewForm');
+    const reviewForm = document.getElementById('reviewForm');
+
+    /* Abre/cierra el panel del formulario y alterna el texto y estado visual del botón */
+    if (addReviewBtn && addReviewPanel) {
+        addReviewBtn.addEventListener('click', () => {
+            const isOpen = addReviewPanel.classList.toggle('active');
+            addReviewBtn.classList.toggle('active', isOpen);
+
+            const label = addReviewBtn.querySelector('span');
+            if (label) label.textContent = isOpen ? 'Cancelar' : 'Escribe tu experiencia';
+        });
+    }
+
+    /* Simula el envío de la reseña: no hay backend, solo feedback visual y reinicio del formulario */
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const reviewSuccessMsg = document.getElementById('review-success-msg');
+            if (reviewSuccessMsg) reviewSuccessMsg.style.display = 'block';
+
+            setTimeout(() => {
+                reviewForm.reset();
+                if (reviewSuccessMsg) reviewSuccessMsg.style.display = 'none';
+
+                if (addReviewPanel) addReviewPanel.classList.remove('active');
+                if (addReviewBtn) {
+                    addReviewBtn.classList.remove('active');
+                    const label = addReviewBtn.querySelector('span');
+                    if (label) label.textContent = 'Escribe tu experiencia';
+                }
+            }, 2000);
+        });
+    }
 });

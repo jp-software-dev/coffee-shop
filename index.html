@@ -14,8 +14,13 @@
     <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="css/style.css">
+    
     <link rel="stylesheet" href="css/animations.css">
     <link rel="icon" type="image/x-icon" href="public/cafe_icono.ico">
+
+    <!-- Performance: precalienta la conexión a los CDNs del video y el poster del hero para que arranquen antes -->
+    <link rel="preconnect" href="https://videos.pexels.com">
+    <link rel="preconnect" href="https://images.pexels.com">
 
     <!-- Íconos (Lucide anclado a versión fija para seguridad y FontAwesome) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
@@ -65,7 +70,7 @@
         </section>
 
         <!-- SECCIÓN: RESERVAS -->
-        <section id="reservas" class="section section-reservas reveal">
+        <section id="reservas" class="section section-reservas">
             <div class="houndstooth-bg"></div>
             
             <div class="container relative z-1">
@@ -163,7 +168,7 @@
         </section>
 
         <!-- SECCIÓN: UBICACIÓN -->
-        <section id="ubicacion" class="section section-location reveal">
+        <section id="ubicacion" class="section section-location">
             <div class="container">
                 <div class="text-center mb-16">
                     <h2 class="section-title">Ubicación</h2>
@@ -175,7 +180,7 @@
                         <div id="map" class="map-container"></div>
                     </div>
                     <div class="location-cards">
-                        <div class="info-card slide-in-right">
+                        <div class="info-card">
                             <div class="icon-box">
                                 <i data-lucide="map-pin"></i>
                             </div>
@@ -185,7 +190,7 @@
                                 <span class="highlight-text">Zona Centro</span>
                             </div>
                         </div>
-                        <div class="info-card slide-in-right">
+                        <div class="info-card">
                             <div class="icon-box">
                                 <i data-lucide="clock"></i>
                             </div>
@@ -194,7 +199,7 @@
                                 <p>Lunes a Viernes: 7:00 AM - 9:00 PM<br>Sábados y Domingos: 8:00 AM - 8:00 PM</p>
                             </div>
                         </div>
-                        <div class="info-card slide-in-right">
+                        <div class="info-card">
                             <div class="icon-box">
                                 <i data-lucide="phone"></i>
                             </div>
