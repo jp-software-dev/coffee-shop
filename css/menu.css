@@ -136,6 +136,25 @@
     background-color: var(--color-primary); /* Dark fallback */
 }
 
+/* --- OPTIMIZACIÓN DE IMÁGENES DE FONDO --- */
+/* Se definen las imágenes aquí en lugar de inline para poder servir tamaños optimizados por resolución.
+   Se reduce el ancho de 1440px a 1280px y la calidad de 80 a 75 para una carga más rápida. */
+
+/* Imágenes por defecto (grandes) */
+#menu-cafes .parallax-header {
+    background-image: url('https://images.unsplash.com/photo-1626426229515-e8c39fcf0134?auto=format&w=1280&q=75&fit=crop');
+}
+#menu-bebidas .parallax-header {
+    background-image: url('https://images.unsplash.com/photo-1574603570434-a4be4e10390c?auto=format&w=1280&q=75&fit=crop');
+}
+#menu-postres .parallax-header {
+    background-image: url('https://images.unsplash.com/photo-1638659782565-3a0b6595dc61?auto=format&w=1280&q=75&fit=crop');
+}
+#menu-alimentos .parallax-header {
+    background-image: url('https://images.pexels.com/photos/4109504/pexels-photo-4109504.jpeg?auto=compress&cs=tinysrgb&w=1280&q=75');
+}
+/* ----------------------------------------- */
+
 /* Capa oscura semitransparente sobre la imagen del parallax para mejorar la legibilidad */
 .parallax-header .overlay {
     position: absolute;
@@ -368,6 +387,20 @@
     .menu-header h1 { font-size: 3.75rem; }
     /* Ajusta el relleno lateral de las cajas de título de categoría */
     .category-title-box { padding: 1.5rem 3.5rem; }
+
+    /* OPTIMIZACIÓN: Carga imágenes de tamaño mediano para tablets (992px de ancho) */
+    #menu-cafes .parallax-header {
+        background-image: url('https://images.unsplash.com/photo-1626426229515-e8c39fcf0134?auto=format&w=992&q=75&fit=crop');
+    }
+    #menu-bebidas .parallax-header {
+        background-image: url('https://images.unsplash.com/photo-1574603570434-a4be4e10390c?auto=format&w=992&q=75&fit=crop');
+    }
+    #menu-postres .parallax-header {
+        background-image: url('https://images.unsplash.com/photo-1638659782565-3a0b6595dc61?auto=format&w=992&q=75&fit=crop');
+    }
+    #menu-alimentos .parallax-header {
+        background-image: url('https://images.pexels.com/photos/4109504/pexels-photo-4109504.jpeg?auto=compress&cs=tinysrgb&w=992&q=75');
+    }
 }
 
 /* Adaptaciones para teléfonos móviles (hasta 768px) */
@@ -391,6 +424,20 @@
         word-wrap: break-word; 
     }
     /* ------------------------------------------------------------- */
+
+    /* OPTIMIZACIÓN: Carga imágenes de tamaño pequeño para móviles (768px de ancho) */
+    #menu-cafes .parallax-header {
+        background-image: url('https://images.unsplash.com/photo-1626426229515-e8c39fcf0134?auto=format&w=768&q=70&fit=crop');
+    }
+    #menu-bebidas .parallax-header {
+        background-image: url('https://images.unsplash.com/photo-1574603570434-a4be4e10390c?auto=format&w=768&q=70&fit=crop');
+    }
+    #menu-postres .parallax-header {
+        background-image: url('https://images.unsplash.com/photo-1638659782565-3a0b6595dc61?auto=format&w=768&q=70&fit=crop');
+    }
+    #menu-alimentos .parallax-header {
+        background-image: url('https://images.pexels.com/photos/4109504/pexels-photo-4109504.jpeg?auto=compress&cs=tinysrgb&w=768&q=70');
+    }
 
     /* Mobile compatibility for parallax */
     /* Desactiva el efecto parallax fijo y reduce la altura de la imagen en móviles para evitar bugs de scroll */

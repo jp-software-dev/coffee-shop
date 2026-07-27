@@ -113,25 +113,36 @@ img { max-width: 100%; display: block; }
 
 /* NAVBAR */
 
-/* Fija la barra de navegación en la parte superior y la sobrepone al resto del contenido */
+/* Fija la barra de navegación en la parte superior. Sólida y visible desde el primer instante por defecto (todas las páginas excepto Menú) */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 25px 0;
+    padding: 15px 0;
+    background-color: var(--color-primary);
+    box-shadow: var(--shadow-soft);
     transition: var(--transition-smooth);
 }
 
-/* Cambia el fondo, reduce el relleno y añade sombra a la barra al hacer scroll */
-.navbar.scrolled {
+/* Excepción exclusiva de Menú: arranca transparente/invisible y se solidifica al hacer scroll (clase aplicada solo en menu.html) */
+.navbar-dynamic {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 25px 0;
+}
+
+.navbar-dynamic.scrolled {
     background-color: var(--color-primary);
     padding: 15px 0;
     box-shadow: var(--shadow-soft);
 }
 
-/* Mantiene el fondo oscuro cuando el menú móvil está desplegado */
-.navbar.menu-open { background-color: rgba(62, 39, 35, 0.85); }
+/* Mantiene el fondo oscuro cuando el menú móvil está desplegado, incluso sobre el header dinámico de Menú */
+.navbar.menu-open {
+    background-color: var(--color-primary);
+    box-shadow: var(--shadow-soft);
+}
 
 /* Distribuye el logotipo y la lista de navegación en extremos opuestos */
 .navbar .container {
@@ -449,26 +460,12 @@ img { max-width: 100%; display: block; }
 
 /* TESTIMONIOS */
 
-/* Fondo oscuro tipo "espresso" para crear contraste premium frente a las secciones claras */
+/* Fondo blanco cremita para un contraste elegante frente a las tarjetas oscuras */
 .section-testimonials {
-    background: linear-gradient(160deg, var(--color-primary) 0%, #241512 100%);
+    background-color: var(--color-bg-light);
     position: relative;
     overflow: hidden;
 }
-
-/* Textura sutil de viñeta radial dorada para dar profundidad sin distraer del contenido */
-.section-testimonials::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 15% 20%, rgba(212, 163, 115, 0.08), transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(212, 163, 115, 0.06), transparent 45%);
-    pointer-events: none;
-}
-
-/* Adapta los encabezados de la sección al fondo oscuro */
-.section-testimonials .section-title { color: var(--color-text-light); }
-.section-testimonials .section-subtitle { color: var(--color-secondary); }
 
 /* Distribuye las tarjetas de opiniones en un layout de tres columnas equitativas */
 .testimonials-grid {
@@ -479,25 +476,24 @@ img { max-width: 100%; display: block; }
     z-index: 1;
 }
 
-/* Tarjeta premium tipo "glass" oscura, con borde dorado sutil y espacio para el ícono de comillas */
+/* Tarjeta premium café oscuro, resaltando sobre el nuevo fondo cremita */
 .testimonial-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(212, 163, 115, 0.18);
-    backdrop-filter: blur(6px);
+    background: linear-gradient(160deg, var(--color-primary) 0%, #2A1B15 100%);
+    border: 1px solid rgba(212, 163, 115, 0.25);
     padding: 45px 35px 35px;
     border-radius: 20px;
     text-align: left;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 20px 40px rgba(62, 39, 35, 0.18);
     transition: var(--transition-smooth);
 }
 
 /* Eleva la tarjeta y resalta el borde dorado al pasar el cursor */
 .testimonial-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(212, 163, 115, 0.5);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+    border-color: rgba(212, 163, 115, 0.6);
+    box-shadow: 0 28px 50px rgba(62, 39, 35, 0.28);
 }
 
 /* Ícono decorativo de comillas, grande y translúcido, como marca de agua en la esquina */
@@ -507,7 +503,7 @@ img { max-width: 100%; display: block; }
     right: 28px;
     font-size: 2.75rem;
     color: var(--color-secondary);
-    opacity: 0.15;
+    opacity: 0.18;
     z-index: 0;
 }
 
@@ -520,9 +516,9 @@ img { max-width: 100%; display: block; }
     z-index: 1;
 }
 
-/* Formatea el texto de la reseña en cursiva, claro sobre el fondo oscuro, con interlineado holgado */
+/* Formatea el texto de la reseña en cursiva, en tono arena claro y legible sobre el café oscuro */
 .testimonial-card p {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(245, 234, 225, 0.9);
     font-style: italic;
     font-size: 1.05rem;
     margin-bottom: 25px;
@@ -544,6 +540,94 @@ img { max-width: 100%; display: block; }
     font-weight: 400;
     font-size: 1.15rem;
     letter-spacing: 0.5px;
+}
+
+/* Envoltorio centrado para el botón que despliega el formulario de nueva reseña */
+.add-review-wrapper {
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Botón "outline" en tono café, pensado para el fondo cremita de la sección */
+.btn-add-review {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+/* Invierte los colores al pasar el cursor, igual que el resto de botones secundarios del sitio */
+.btn-add-review:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    transform: translateY(-2px);
+}
+
+/* Mantiene el botón en estado "invertido" mientras el formulario está abierto */
+.btn-add-review.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+/* Panel colapsable del formulario de nueva reseña: oculto por defecto y con transición suave al abrir */
+.add-review-panel {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    padding: 0 40px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.5s ease, margin 0.5s ease;
+}
+
+/* Estado visible del panel: se revela con una altura generosa y relleno completo */
+.add-review-panel.active {
+    max-height: 900px;
+    opacity: 1;
+    padding: 40px;
+    margin-top: 30px;
+}
+
+/* Selector de calificación por estrellas: orden invertido en el HTML para permitir el efecto hover en cascada */
+.star-rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* Oculta los radios nativos, dejando visibles solo los íconos de estrella asociados */
+.star-rating-input input { display: none; }
+
+/* Estrella inactiva por defecto, en un tono neutro discreto */
+.star-rating-input label {
+    font-size: 1.6rem;
+    color: var(--color-border);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+/* Ilumina en dorado la estrella seleccionada y todas las anteriores, tanto en hover como al confirmar */
+.star-rating-input label:hover,
+.star-rating-input label:hover ~ label,
+.star-rating-input input:checked ~ label {
+    color: var(--color-secondary);
 }
 
 
@@ -991,7 +1075,7 @@ img { max-width: 100%; display: block; }
         left: auto; /* Reinicia el valor left por si se heredó */
         width: 60%; /* Solo el 60% del ancho de la pantalla */
         height: 100vh;
-        background-color: rgba(62, 39, 35, 0.98); 
+        background-color: var(--color-primary); 
         justify-content: flex-start; /* Alinea hacia arriba */
         align-items: flex-start; /* Alinea los enlaces a la izquierda dentro del panel */
         padding: 100px 30px; /* Reduje el padding lateral un poco para dar más espacio a las líneas largas */
