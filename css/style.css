@@ -22,6 +22,8 @@
     --font-body: 'DM Sans', sans-serif;
     --font-accent: 'Italiana', serif;
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Curva "expo-out" reservada para hovers de botones e imágenes: arranca rápido y frena con suavidad, sin rebotes ni saltos bruscos */
+    --ease-luxury: cubic-bezier(0.19, 1, 0.22, 1);
     --shadow-soft: 0 8px 24px rgba(62, 39, 35, 0.08);
 }
 
@@ -174,14 +176,39 @@ img { max-width: 100%; display: block; }
 
 /* Establece el tamaño, grosor y color claro a los enlaces del menú principal */
 .nav-links a {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 6px;
     color: var(--color-text-light);
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: 1px;
+    transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
-/* Cambia el color del enlace de navegación a un tono dorado al pasar el cursor */
-.nav-links a:hover { color: var(--color-secondary); }
+/* Línea inferior indicadora: nace en 0 y se expande desde la izquierda con una curva elegante */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-secondary);
+    transition: width 0.45s var(--ease-luxury);
+}
+
+/* Estado hover y estado activo (sección visible en pantalla o página actual) comparten el mismo tratamiento visual */
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--color-secondary);
+    font-weight: 700;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
 
 /* Oculta por defecto el botón tipo hamburguesa en pantallas de escritorio */
 .mobile-toggle {
@@ -278,7 +305,8 @@ img { max-width: 100%; display: block; }
     cursor: pointer;
     font-size: 1rem;
     display: inline-block;
-    transition: var(--transition-smooth);
+    /* Transform y sombra usan la curva "expo-out" para una elevación fluida y de alta gama; color/fondo se mantienen en una curva estándar más corta */
+    transition: transform 0.5s var(--ease-luxury), box-shadow 0.5s var(--ease-luxury), background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 /* Estilo para el botón principal: degradado dorado sólido, texto oscuro y resplandor de énfasis (jerarquía #1) */
@@ -398,7 +426,7 @@ img { max-width: 100%; display: block; }
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition-smooth);
+    transition: transform 0.6s var(--ease-luxury);
 }
 
 /* Genera un sutil efecto de acercamiento (zoom) en la imagen de la tarjeta al hacer hover */
@@ -486,11 +514,14 @@ img { max-width: 100%; display: block; }
     position: relative;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(62, 39, 35, 0.18);
-    transition: var(--transition-smooth);
+    transition: transform 0.55s var(--ease-luxury), box-shadow 0.55s var(--ease-luxury), border-color 0.4s ease;
 }
 
-/* Eleva la tarjeta y resalta el borde dorado al pasar el cursor */
-.testimonial-card:hover {
+/* Eleva la tarjeta y resalta el borde dorado al pasar el cursor.
+   Se repite el selector con ".reveal" para ganarle en especificidad a ".reveal.active" (misma especificidad
+   base) y que el hover siga funcionando después de que la tarjeta ya se reveló mediante scroll */
+.testimonial-card:hover,
+.testimonial-card.reveal:hover {
     transform: translateY(-8px);
     border-color: rgba(212, 163, 115, 0.6);
     box-shadow: 0 28px 50px rgba(62, 39, 35, 0.28);
@@ -617,17 +648,25 @@ img { max-width: 100%; display: block; }
 
 /* Estrella inactiva por defecto, en un tono neutro discreto */
 .star-rating-input label {
+    display: inline-block;
     font-size: 1.6rem;
     color: var(--color-border);
     cursor: pointer;
-    transition: var(--transition-smooth);
+    transition: color 0.35s ease, transform 0.4s var(--ease-luxury), text-shadow 0.4s ease;
 }
 
-/* Ilumina en dorado la estrella seleccionada y todas las anteriores, tanto en hover como al confirmar */
+/* Ilumina en dorado con brillo cálido y escala la estrella seleccionada y todas las anteriores, tanto en hover como al confirmar */
 .star-rating-input label:hover,
 .star-rating-input label:hover ~ label,
 .star-rating-input input:checked ~ label {
     color: var(--color-secondary);
+    transform: scale(1.22);
+    text-shadow: 0 0 14px rgba(212, 163, 115, 0.7);
+}
+
+/* La estrella justo bajo el cursor se distingue ligeramente más que el resto de la cascada iluminada */
+.star-rating-input label:hover {
+    transform: scale(1.32);
 }
 
 
@@ -680,12 +719,18 @@ img { max-width: 100%; display: block; }
     display: flex;
     align-items: center;
     gap: 20px;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s var(--ease-luxury), box-shadow 0.5s var(--ease-luxury);
     box-shadow: var(--shadow-soft);
 }
 
-/* Desplaza ligeramente la tarjeta de información hacia la izquierda de forma interactiva */
-.info-card:hover { transform: translateX(-5px); }
+/* Desplaza ligeramente la tarjeta de información hacia la izquierda de forma interactiva.
+   Se repite el selector con ".slide-in-right" para ganarle en especificidad a ".slide-in-right.active"
+   (misma especificidad base) y que el hover siga funcionando después de que la tarjeta ya se reveló */
+.info-card:hover,
+.info-card.slide-in-right:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 14px 32px rgba(62, 39, 35, 0.14);
+}
 
 /* Crea un pequeño contenedor cuadrado con bordes para alojar el ícono de contacto */
 .icon-box {
@@ -773,11 +818,16 @@ img { max-width: 100%; display: block; }
     background-color: var(--color-primary);
 }
 
-/* Hace que la foto cubra todo su espacio vertical sin deformarse */
+/* Hace que la foto cubra todo su espacio vertical sin deformarse, con un ligero acercamiento elegante al pasar el cursor sobre la tarjeta */
 .card-image-side img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.7s var(--ease-luxury);
+}
+
+.reservation-card:hover .card-image-side img {
+    transform: scale(1.06);
 }
 
 /* SVG posicionado absolutamente que simula un corte de "onda" entre la imagen y el formulario */
@@ -877,17 +927,31 @@ img { max-width: 100%; display: block; }
     z-index: 2;
 }
 
-/* Oculta por defecto y da fondo verde a la alerta temporal cuando la reserva tiene éxito */
+/* Alerta de confirmación colapsada por defecto: permanece en el flujo del documento para animar su entrada sin saltos de layout */
 .success-feedback {
-    display: none;
+    display: block;
     background-color: var(--color-success-sage);
     color: var(--color-text-light);
-    padding: 14px 20px;
     border-radius: 8px;
-    margin-top: 15px;
     text-align: center;
     font-weight: 600;
     width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding: 0 20px;
+    margin-top: 0;
+    transform: translateY(-8px);
+    transition: max-height 0.5s var(--ease-luxury), opacity 0.4s ease, padding 0.45s var(--ease-luxury), margin-top 0.45s var(--ease-luxury), transform 0.45s var(--ease-luxury);
+}
+
+/* Estado visible: se revela con una transición moderna de altura + desvanecimiento, sin alterar bruscamente el resto del formulario */
+.success-feedback.show {
+    max-height: 100px;
+    opacity: 1;
+    padding: 14px 20px;
+    margin-top: 15px;
+    transform: translateY(0);
 }
 
 
