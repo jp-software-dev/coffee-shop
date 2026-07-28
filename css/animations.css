@@ -115,10 +115,24 @@
 
 /* Reduce las dimensiones y el margen del botón flotante en pantallas pequeñas (móviles) */
 @media screen and (max-width: 576px) {
-    .whatsapp-float { 
-        bottom: 20px; 
-        right: 20px; 
-        width: 60px; 
-        height: 60px; 
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Accesibilidad: usuarios que solicitan menos movimiento ven el contenido final directamente, sin animación */
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .slide-in-right,
+    .menu-card.fade-in,
+    .hero-content,
+    .whatsapp-float {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
