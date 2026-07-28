@@ -30,4 +30,4 @@ Sigue estos pasos para desplegar el servidor de desarrollo local. Asegúrate de 
 
 1. Clona el repositorio:
    ```bash
-   git clone [https://github.com/jp-software-dev/cafe-rustico.git](https://github.com/jp-software-dev/cafe-rustico.git)
+   git clone https://github.com/jp-software-dev/coffee-shop.git
