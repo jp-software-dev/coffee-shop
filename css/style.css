@@ -1018,6 +1018,24 @@ img { max-width: 100%; display: block; }
     transform: translateY(-3px);
 }
 
+/* Color de hover específico para TikTok, usando su paleta de color cian/rosa */
+.social-circle[aria-label="TikTok"]:hover {
+    border-color: #25F4EE; /* Color cian vibrante oficial de TikTok */
+    color: #25F4EE;
+}
+
+/* Color de hover específico para Facebook */
+.social-circle[aria-label="Facebook"]:hover {
+    border-color: #1877F2; /* Azul oficial de Facebook */
+    color: #1877F2;
+}
+
+/* Color de hover específico para Instagram */
+.social-circle[aria-label="Instagram"]:hover {
+    border-color: #E4405F; /* Rosa/gradiente característico de Instagram */
+    color: #E4405F;
+}
+
 /* Aplica un formato de título claro y en mayúsculas a cada columna adicional (ej. "Enlaces") */
 .footer-col h5 {
     font-family: var(--font-body);
