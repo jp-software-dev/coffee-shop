@@ -67,19 +67,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* 3. ANIMACIONES FLUIDAS (Scroll reveal) */
-    
+
+    /* Asigna un retraso escalonado a cada tarjeta dentro de un contenedor ".stagger-group" para que
+       aparezcan en cascada (una tras otra) en lugar de todas al mismo tiempo. El paso y el tope evitan
+       que el usuario espere demasiado si el contenedor tiene muchos elementos */
+    document.querySelectorAll('.stagger-group').forEach(group => {
+        const staggeredChildren = group.querySelectorAll(':scope > .reveal, :scope > .slide-in-right');
+        staggeredChildren.forEach((el, i) => {
+            el.style.transitionDelay = `${Math.min(i * 0.08, 0.48)}s`;
+        });
+    });
+
     /* Configura un observador que añade la clase 'active' a los elementos justo cuando entran en la pantalla */
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                obs.unobserve(entry.target); 
+                obs.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
 
     /* Selecciona todos los elementos con clases de animación y los asigna al observador */
     document.querySelectorAll('.reveal, .slide-in-right').forEach(el => observer.observe(el));
+
+    /* 3b. INDICADOR DINÁMICO DE NAVEGACIÓN (Scrollspy) */
+
+    /* Marca como activo el enlace del navbar que corresponde a la página actual (útil en Menú y Reseñas,
+       que son páginas independientes sin secciones ancladas por scroll) */
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navAnchors = document.querySelectorAll('.nav-links a');
+
+    navAnchors.forEach(link => {
+        const linkPage = link.getAttribute('href').split('#')[0] || 'index.html';
+        if (linkPage === currentPage && !link.hash) {
+            link.classList.add('active');
+        }
+    });
+
+    /* En index.html, resalta en tiempo real el enlace de la sección visible mientras el usuario recorre la página */
+    const spySections = document.querySelectorAll('main section[id]');
+    if (spySections.length && (currentPage === 'index.html' || currentPage === '')) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+
+                navAnchors.forEach(link => {
+                    const isMatch = link.getAttribute('href') === `index.html#${entry.target.id}` ||
+                                     link.getAttribute('href') === `#${entry.target.id}`;
+                    link.classList.toggle('active', isMatch);
+                });
+            });
+        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+        spySections.forEach(section => sectionObserver.observe(section));
+    }
 
     /* 4. LÓGICA DE FILTROS PARA EL MENÚ (Con animaciones y Accesibilidad) */
     
@@ -153,15 +195,44 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Valida que el teléfono tenga exactamente 10 dígitos numéricos (estándar de México) */
     const isValidPhone = (value) => /^\d{10}$/.test(value);
 
+    /* Clave y ventana de tiempo usadas por el límite de frecuencia (rate limiting) contra ráfagas de envíos automatizados */
+    const BOOKING_RATE_LIMIT_KEY = 'cr_last_booking_submit';
+    const BOOKING_RATE_LIMIT_MS = 45000; // 45s: suficiente para frenar bots en bucle sin molestar a un humano real
+
+    /* Coincide con enlaces (http/https/www) o etiquetas HTML: patrones típicos de spam automatizado en campos de texto libre */
+    const SPAM_PATTERN = /https?:\/\/|www\.|<[^>]*>/i;
+
+    /* Quita corchetes angulares del texto libre para evitar cualquier intento de inyectar etiquetas en el mensaje generado */
+    const sanitizeFreeText = (value) => value.replace(/[<>]/g, '').trim();
+
     /* Maneja el proceso de envío del formulario de reserva */
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             /* Evita que la página se recargue al enviar los datos */
             e.preventDefault();
 
-            /* VALIDACIÓN HONEYPOT: Verifica si el campo invisible fue llenado por un bot */
-            const honeypot = document.getElementById('validacion_bot');
-            if (honeypot && honeypot.value !== '') {
+            const btnSubmit = document.getElementById('submitBtn');
+            const btnSubmitText = document.getElementById('submitBtnText');
+            const successMsg = document.getElementById('form-success-msg');
+            const originalBtnLabel = btnSubmitText ? btnSubmitText.textContent : '';
+
+            /* Muestra un aviso temporal directamente en el botón (sacude + cambia texto) sin depender de alert() ni de nuevos elementos visuales */
+            const flashButtonNotice = (message) => {
+                if (!btnSubmit || !btnSubmitText) return;
+                btnSubmitText.textContent = message;
+                btnSubmit.classList.add('input-error');
+                setTimeout(() => {
+                    btnSubmitText.textContent = originalBtnLabel;
+                    btnSubmit.classList.remove('input-error');
+                }, 2200);
+            };
+
+            /* VALIDACIÓN HONEYPOT DOBLE: si cualquiera de los dos campos trampa invisibles fue rellenado, es un bot */
+            const isHoneypotTriggered = ['validacion_bot', 'website_url'].some(id => {
+                const field = document.getElementById(id);
+                return field && field.value !== '';
+            });
+            if (isHoneypotTriggered) {
                 console.warn('Bloqueo de seguridad: Actividad sospechosa detectada (Honeypot).');
                 return;
             }
@@ -169,13 +240,28 @@ document.addEventListener('DOMContentLoaded', () => {
             /* VALIDACIÓN TRAMPA DE TIEMPO: Calcula los segundos transcurridos desde que cargó la página */
             const formSubmitTime = new Date().getTime();
             const timeToFill = (formSubmitTime - formLoadTime) / 1000;
-            
+
             /* Bloquea la ejecución si el formulario se llenó en menos de 3 segundos */
             if (timeToFill < 3) {
                 console.warn('Bloqueo de seguridad: Formulario completado demasiado rápido.');
                 return;
             }
-            
+
+            /* LÍMITE DE FRECUENCIA: evita ráfagas de envíos repetidos desde el mismo navegador (bots o doble clic accidental) */
+            let lastSubmit = 0;
+            try {
+                lastSubmit = Number(localStorage.getItem(BOOKING_RATE_LIMIT_KEY) || 0);
+            } catch (err) {
+                /* Si el almacenamiento local no está disponible (modo privado estricto, etc.), se omite este control sin romper el envío */
+            }
+            const elapsedSinceLast = Date.now() - lastSubmit;
+            if (lastSubmit && elapsedSinceLast < BOOKING_RATE_LIMIT_MS) {
+                const secondsLeft = Math.ceil((BOOKING_RATE_LIMIT_MS - elapsedSinceLast) / 1000);
+                console.warn('Bloqueo de seguridad: límite de envíos alcanzado, espera antes de reservar de nuevo.');
+                flashButtonNotice(`Espera ${secondsLeft}s...`);
+                return;
+            }
+
             /* Lista de los campos que son obligatorios revisar */
             const fields = ['nombre', 'email', 'telefono', 'personas', 'fecha', 'hora'];
             let isValid = true;
@@ -208,15 +294,28 @@ document.addEventListener('DOMContentLoaded', () => {
             /* Detiene la ejecución de la reserva si algún campo falló las validaciones visuales */
             if (!isValid) return;
 
-            /* Recopilar Datos: Extrae los valores finales listos para ser enviados */
+            /* FILTRO ANTI-SPAM: bloquea contenido con enlaces o etiquetas HTML, un patrón típico de bots que abusan de los campos de texto libre */
+            const nombreInput = document.getElementById('nombre');
+            const mensajeInput = document.getElementById('mensaje');
+            if (SPAM_PATTERN.test(nombreInput.value) || SPAM_PATTERN.test(mensajeInput.value)) {
+                console.warn('Bloqueo de seguridad: contenido no permitido (enlaces o HTML) detectado.');
+                [nombreInput, mensajeInput].forEach(input => {
+                    input.classList.add('input-error');
+                    setTimeout(() => input.classList.remove('input-error'), 400);
+                });
+                flashButtonNotice('Contenido no permitido');
+                return;
+            }
+
+            /* Recopilar Datos: Extrae los valores finales listos para ser enviados, saneando el texto libre */
             const data = {
-                nombre: document.getElementById('nombre').value,
-                email: document.getElementById('email').value,
-                telefono: document.getElementById('telefono').value,
+                nombre: sanitizeFreeText(nombreInput.value),
+                email: emailInput.value.trim(),
+                telefono: telefonoInput.value,
                 personas: document.getElementById('personas').value,
                 fecha: document.getElementById('fecha').value,
                 hora: document.getElementById('hora').value,
-                mensaje: document.getElementById('mensaje').value || 'Sin comentarios adicionales.'
+                mensaje: sanitizeFreeText(mensajeInput.value) || 'Sin comentarios adicionales.'
             };
 
             /* Formatea los datos recopilados en un mensaje legible y estructurado para WhatsApp */
@@ -231,25 +330,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             /* Genera la URL con el número de teléfono y el mensaje codificado */
             const waUrl = `https://wa.me/527298369274?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            /* Lógica de Feedback: Selecciona botón y mensaje de éxito */
-            const btnSubmit = document.getElementById('submitBtn');
-            const successMsg = document.getElementById('form-success-msg');
 
-            /* Bloquea el botón visualmente para evitar envíos múltiples y muestra el mensaje de éxito */
+            /* Registra la marca de tiempo del envío exitoso para que el límite de frecuencia aplique en el próximo intento */
+            try {
+                localStorage.setItem(BOOKING_RATE_LIMIT_KEY, String(Date.now()));
+            } catch (err) {
+                /* Almacenamiento no disponible: el resto del flujo continúa con normalidad */
+            }
+
+            /* Bloquea el botón visualmente para evitar envíos múltiples y revela el mensaje de éxito con una transición suave */
             btnSubmit.disabled = true;
             btnSubmit.style.opacity = '0.5';
-            successMsg.style.display = 'block';
+            successMsg.classList.add('show');
 
             /* Pequeña pausa antes de abrir WhatsApp para que el usuario procese el mensaje visual de éxito */
             setTimeout(() => {
                 window.open(waUrl, '_blank');
-                
+
                 /* Restaurar formulario a su estado original vaciando campos y rehabilitando botón */
                 bookingForm.reset();
                 btnSubmit.disabled = false;
                 btnSubmit.style.opacity = '1';
-                successMsg.style.display = 'none';
+                successMsg.classList.remove('show');
             }, 1500);
         });
     }
@@ -298,11 +400,11 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const reviewSuccessMsg = document.getElementById('review-success-msg');
-            if (reviewSuccessMsg) reviewSuccessMsg.style.display = 'block';
+            if (reviewSuccessMsg) reviewSuccessMsg.classList.add('show');
 
             setTimeout(() => {
                 reviewForm.reset();
-                if (reviewSuccessMsg) reviewSuccessMsg.style.display = 'none';
+                if (reviewSuccessMsg) reviewSuccessMsg.classList.remove('show');
 
                 if (addReviewPanel) addReviewPanel.classList.remove('active');
                 if (addReviewBtn) {
