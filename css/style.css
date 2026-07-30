@@ -1058,11 +1058,14 @@ img { max-width: 100%; display: block; }
     transform: translateX(5px);
 }
 
-/* Da un color de acento y dimensiones específicas a los pequeños íconos de teléfono/dirección */
-.contact-info-list i {
+/* Da un color de acento y dimensiones específicas a los pequeños íconos de teléfono/dirección.
+   Se incluye "svg" porque Lucide sustituye cada <i data-lucide> por un <svg> en tiempo de ejecución */
+.contact-info-list i,
+.contact-info-list svg {
     color: var(--color-secondary);
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
 }
 
 /* --- BARRA DE DERECHOS RESERVADOS --- */
