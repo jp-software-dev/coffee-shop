@@ -291,7 +291,7 @@
 
 /* Estilo del eslogan o pequeña descripción del pie de página */
 .footer-tagline {
-    color: #BCAAA4;
+    color: #C4A98C;
     font-size: 1rem;
     margin-bottom: 2.5rem;
     max-width: 30rem;
@@ -331,7 +331,7 @@
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    color: #BCAAA4; /* Estandarización de color */
+    color: #C4A98C; /* Estandarización de color */
     font-size: 0.8rem; /* Aumento de tamaño para coincidir */
     text-transform: uppercase; /* Transformación a mayúsculas */
     letter-spacing: 3px; /* Aumento de espaciado para coincidir */

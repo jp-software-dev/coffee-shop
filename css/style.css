@@ -8,17 +8,17 @@
 
 /* Define la paleta de colores, fuentes y efectos globales para mantener consistencia */
 :root {
-    --color-primary:       #3E2723;
-    --color-secondary:     #D4A373;
-    --color-accent:        #C1652F;
-    --color-surface:       #F5EAE1;
-    --color-bg-light:      #FAF6F0;
-    --color-paper:         #F4F1EA;
+    --color-primary:       #2C1B14;
+    --color-secondary:     #C9975E;
+    --color-accent:        #A8481F;
+    --color-surface:       #F7EBDD;
+    --color-bg-light:      #FBF6EF;
+    --color-paper:         #F5EEE3;
     --color-text-light:    #FFFFFF;
-    --color-text-dark:     #2D1A11;
-    --color-text-muted:    #795C4D;
-    --color-border:        #E6D5C3;
-    --color-success-sage:  #2F6B4F;
+    --color-text-dark:     #2A170F;
+    --color-text-muted:    #8C6E56;
+    --color-border:        #E8D6BE;
+    --color-success-sage:  #3A6B4F;
     --font-display: 'Roboto Slab', serif;
     --font-body: 'DM Sans', sans-serif;
     --font-accent: 'Italiana', serif;
@@ -312,18 +312,18 @@ img { max-width: 100%; display: block; }
 
 /* Estilo para el botón principal: degradado terracota sólido, texto claro y resplandor de énfasis (jerarquía #1) */
 .btn-primary {
-    background: linear-gradient(135deg, var(--color-accent), #A5511F);
+    background: linear-gradient(135deg, var(--color-accent), #7C3417);
     color: var(--color-text-light);
     border: none;
     font-weight: 700;
-    box-shadow: 0 10px 25px rgba(193, 101, 47, 0.35);
+    box-shadow: 0 10px 25px rgba(168, 72, 31, 0.35);
 }
 
 /* Intensifica el resplandor y eleva el botón principal al interactuar */
 .btn-primary:hover {
-    background: linear-gradient(135deg, #A5511F, var(--color-accent));
+    background: linear-gradient(135deg, #7C3417, var(--color-accent));
     transform: translateY(-3px);
-    box-shadow: 0 14px 30px rgba(193, 101, 47, 0.5);
+    box-shadow: 0 14px 30px rgba(168, 72, 31, 0.5);
 }
 
 /* Estado deshabilitado (ej. hora de reserva inválida): apaga el degradado y bloquea el hover para que se lea como no interactivo */
@@ -521,7 +521,7 @@ img { max-width: 100%; display: block; }
 
 /* Tarjeta premium café oscuro, resaltando sobre el nuevo fondo cremita */
 .testimonial-card {
-    background: linear-gradient(160deg, var(--color-primary) 0%, #2A1B15 100%);
+    background: linear-gradient(160deg, var(--color-primary) 0%, #190F09 100%);
     border: 1px solid rgba(212, 163, 115, 0.25);
     padding: 45px 35px 35px;
     border-radius: 20px;
@@ -777,6 +777,17 @@ img { max-width: 100%; display: block; }
     color: var(--color-text-muted);
     font-size: 0.95rem;
     line-height: 1.5;
+}
+
+/* Apila cada dato (horario/contacto) en su propia línea dentro del párrafo, en vez de texto corrido con "|" */
+.info-content p .info-line {
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Evita un espacio extra debajo del último dato apilado */
+.info-content p .info-line:last-child {
+    margin-bottom: 0;
 }
 
 
