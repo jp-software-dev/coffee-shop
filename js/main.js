@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* En index.html, resalta en tiempo real el enlace de la sección visible mientras el usuario recorre la página */
-    const spySections = document.querySelectorAll('main section[id]');
+    const spySections = document.querySelectorAll('main section[id], footer[id]');
     if (spySections.length && (currentPage === 'index.html' || currentPage === '')) {
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -383,15 +383,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 /* Almacenamiento no disponible: el resto del flujo continúa con normalidad */
             }
 
+            /* Abre WhatsApp de inmediato, dentro del mismo gesto de clic del usuario: si esta llamada se retrasa
+               con un setTimeout, Safari/iOS y varios bloqueadores de pop-ups la descartan silenciosamente porque
+               ya no la reconocen como una acción iniciada por el usuario (por eso el mensaje de éxito aparecía
+               pero WhatsApp nunca se abría) */
+            window.open(waUrl, '_blank');
+
             /* Bloquea el botón visualmente para evitar envíos múltiples y revela el mensaje de éxito con una transición suave */
             btnSubmit.disabled = true;
             btnSubmit.style.opacity = '0.5';
             successMsg.classList.add('show');
 
-            /* Pequeña pausa antes de abrir WhatsApp para que el usuario procese el mensaje visual de éxito */
+            /* Pequeña pausa solo para que el usuario procese el mensaje visual de éxito antes de restaurar el formulario */
             setTimeout(() => {
-                window.open(waUrl, '_blank');
-
                 /* Restaurar formulario a su estado original vaciando campos y rehabilitando botón */
                 bookingForm.reset();
                 btnSubmit.disabled = false;
