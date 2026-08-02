@@ -64,6 +64,26 @@
     border-color: var(--color-accent) !important;
 }
 
+/* Mensaje de error contextual (ej. hora pasada) colapsado por defecto para no romper el layout del formulario */
+.field-error-msg {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+/* Estado visible: aparece con una pequeña transición suave debajo del input afectado */
+.field-error-msg.show {
+    max-height: 40px;
+    opacity: 1;
+    margin-top: 6px;
+}
+
 /* Entrada Hero */
 
 /* Fotogramas clave para una animación de entrada larga desde abajo hacia arriba */

@@ -168,6 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Obtiene las referencias del formulario y sus campos principales */
     const bookingForm = document.getElementById('bookingForm');
     const fechaInput = document.getElementById('fecha');
+    const horaInput = document.getElementById('hora');
+    const horaErrorMsg = document.getElementById('hora-error');
     const telefonoInput = document.getElementById('telefono');
 
     /* TRAMPA DE TIEMPO: Registra el momento exacto en que se carga el script en el navegador del usuario */
@@ -177,6 +179,46 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fechaInput) {
         const today = new Date().toISOString().split('T')[0];
         fechaInput.setAttribute('min', today);
+    }
+
+    /* Devuelve la fecha de hoy en formato YYYY-MM-DD según el reloj local del dispositivo */
+    const getTodayStr = () => new Date().toISOString().split('T')[0];
+
+    /* Devuelve la hora actual en formato HH:MM para compararla directamente contra el valor del input time */
+    const getNowTimeStr = () => {
+        const now = new Date();
+        return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    };
+
+    /* VALIDACIÓN ANTI-VIAJES EN EL TIEMPO: si la fecha elegida es hoy, la hora debe ser estrictamente mayor a la hora actual.
+       Muestra un mensaje de error debajo del input y bloquea el botón de enviar mientras la hora sea inválida. */
+    const validateHoraContraHoraActual = () => {
+        if (!fechaInput || !horaInput) return true;
+
+        const submitBtn = document.getElementById('submitBtn');
+        const isToday = fechaInput.value === getTodayStr();
+        const isPastTime = isToday && horaInput.value !== '' && horaInput.value <= getNowTimeStr();
+
+        if (isPastTime) {
+            horaInput.classList.add('input-error');
+            if (horaErrorMsg) {
+                horaErrorMsg.textContent = 'Elige una hora posterior a la hora actual.';
+                horaErrorMsg.classList.add('show');
+            }
+            if (submitBtn) submitBtn.disabled = true;
+            return false;
+        }
+
+        horaInput.classList.remove('input-error');
+        if (horaErrorMsg) horaErrorMsg.classList.remove('show');
+        if (submitBtn) submitBtn.disabled = false;
+        return true;
+    };
+
+    if (fechaInput && horaInput) {
+        fechaInput.addEventListener('change', validateHoraContraHoraActual);
+        horaInput.addEventListener('input', validateHoraContraHoraActual);
+        horaInput.addEventListener('change', validateHoraContraHoraActual);
     }
 
     /* El teléfono mexicano son 10 dígitos: se bloquea cualquier letra/símbolo en tiempo real
@@ -290,6 +332,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 isValid = false;
                 setTimeout(() => telefonoInput.classList.remove('input-error'), 400);
             }
+
+            /* Reafirma la validación de hora pasada justo antes de enviar, por si el usuario forzó el envío (ej. Enter) sin disparar los eventos de input/change */
+            if (!validateHoraContraHoraActual()) isValid = false;
 
             /* Detiene la ejecución de la reserva si algún campo falló las validaciones visuales */
             if (!isValid) return;
