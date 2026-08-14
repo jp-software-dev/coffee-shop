@@ -6,7 +6,7 @@
     top: 0;
     z-index: 100;
     width: 100%;
-    background-color: rgba(250, 246, 240, 0.95);
+    background-color: rgba(252, 250, 237, 0.95);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border);
@@ -195,7 +195,7 @@
 
 /* Color de fondo alternativo para la caja del título dependiendo del tema o sección */
 .alternate-bg .category-title-box {
-    background-color: rgba(244, 241, 234, 0.98);
+    background-color: rgba(235, 229, 217, 0.98);
 }
 
 /* Estilo del texto del título dentro de la caja de categoría */
@@ -250,7 +250,7 @@
 /* Línea punteada que conecta el nombre del producto con su precio */
 .leader-dots {
     flex-grow: 1;
-    border-bottom: 2px dotted rgba(212, 163, 115, 0.4);
+    border-bottom: 2px dotted rgba(196, 139, 90, 0.4);
     margin-bottom: 0.5rem;
 }
 

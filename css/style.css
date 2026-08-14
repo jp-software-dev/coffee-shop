@@ -8,16 +8,16 @@
 
 /* Define la paleta de colores, fuentes y efectos globales para mantener consistencia */
 :root {
-    --color-primary:       #2C1B14;
-    --color-secondary:     #C9975E;
-    --color-accent:        #A8481F;
-    --color-surface:       #F7EBDD;
-    --color-bg-light:      #FBF6EF;
-    --color-paper:         #F5EEE3;
+    --color-primary:       #352A22;
+    --color-secondary:     #C48B5A;
+    --color-accent:        #C48B5A;
+    --color-surface:       #EBE5D9;
+    --color-bg-light:      #FCFAED;
+    --color-paper:         #EBE5D9;
     --color-text-light:    #FFFFFF;
-    --color-text-dark:     #2A170F;
-    --color-text-muted:    #8C6E56;
-    --color-border:        #E8D6BE;
+    --color-text-dark:     #352A22;
+    --color-text-muted:    #6E5C4C;
+    --color-border:        #D9CBB4;
     --color-success-sage:  #3A6B4F;
     --font-display: 'Roboto Slab', serif;
     --font-body: 'DM Sans', sans-serif;
@@ -25,7 +25,7 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     /* Curva "expo-out" reservada para hovers de botones e imágenes: arranca rápido y frena con suavidad, sin rebotes ni saltos bruscos */
     --ease-luxury: cubic-bezier(0.19, 1, 0.22, 1);
-    --shadow-soft: 0 8px 24px rgba(62, 39, 35, 0.08);
+    --shadow-soft: 0 8px 24px rgba(53, 42, 34, 0.08);
 }
 
 
@@ -254,7 +254,7 @@ img { max-width: 100%; display: block; }
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(62, 39, 35, 0.5), rgba(62, 39, 35, 0.8));
+    background: linear-gradient(rgba(53, 42, 34, 0.5), rgba(53, 42, 34, 0.8));
     z-index: -1;
 }
 
@@ -312,18 +312,18 @@ img { max-width: 100%; display: block; }
 
 /* Estilo para el botón principal: degradado terracota sólido, texto claro y resplandor de énfasis (jerarquía #1) */
 .btn-primary {
-    background: linear-gradient(135deg, var(--color-accent), #7C3417);
+    background: linear-gradient(135deg, var(--color-accent), #916743);
     color: var(--color-text-light);
     border: none;
     font-weight: 700;
-    box-shadow: 0 10px 25px rgba(168, 72, 31, 0.35);
+    box-shadow: 0 10px 25px rgba(196, 139, 90, 0.35);
 }
 
 /* Intensifica el resplandor y eleva el botón principal al interactuar */
 .btn-primary:hover {
-    background: linear-gradient(135deg, #7C3417, var(--color-accent));
+    background: linear-gradient(135deg, #916743, var(--color-accent));
     transform: translateY(-3px);
-    box-shadow: 0 14px 30px rgba(168, 72, 31, 0.5);
+    box-shadow: 0 14px 30px rgba(196, 139, 90, 0.5);
 }
 
 /* Estado deshabilitado (ej. hora de reserva inválida): apaga el degradado y bloquea el hover para que se lea como no interactivo */
@@ -521,14 +521,14 @@ img { max-width: 100%; display: block; }
 
 /* Tarjeta premium café oscuro, resaltando sobre el nuevo fondo cremita */
 .testimonial-card {
-    background: linear-gradient(160deg, var(--color-primary) 0%, #190F09 100%);
-    border: 1px solid rgba(212, 163, 115, 0.25);
+    background: linear-gradient(160deg, var(--color-primary) 0%, #1E180F 100%);
+    border: 1px solid rgba(196, 139, 90, 0.25);
     padding: 45px 35px 35px;
     border-radius: 20px;
     text-align: left;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(62, 39, 35, 0.18);
+    box-shadow: 0 20px 40px rgba(53, 42, 34, 0.18);
     transition: transform 0.55s var(--ease-luxury), box-shadow 0.55s var(--ease-luxury), border-color 0.4s ease;
 }
 
@@ -538,8 +538,8 @@ img { max-width: 100%; display: block; }
 .testimonial-card:hover,
 .testimonial-card.reveal:hover {
     transform: translateY(-8px);
-    border-color: rgba(212, 163, 115, 0.6);
-    box-shadow: 0 28px 50px rgba(62, 39, 35, 0.28);
+    border-color: rgba(196, 139, 90, 0.6);
+    box-shadow: 0 28px 50px rgba(53, 42, 34, 0.28);
 }
 
 /* Ícono decorativo de comillas, grande y translúcido, como marca de agua en la esquina */
@@ -564,7 +564,7 @@ img { max-width: 100%; display: block; }
 
 /* Formatea el texto de la reseña en cursiva, en tono arena claro y legible sobre el café oscuro */
 .testimonial-card p {
-    color: rgba(245, 234, 225, 0.9);
+    color: rgba(252, 250, 237, 0.9);
     font-style: italic;
     font-size: 1.05rem;
     margin-bottom: 25px;
@@ -676,7 +676,7 @@ img { max-width: 100%; display: block; }
 .star-rating-input input:checked ~ label {
     color: var(--color-secondary);
     transform: scale(1.22);
-    text-shadow: 0 0 14px rgba(212, 163, 115, 0.7);
+    text-shadow: 0 0 14px rgba(196, 139, 90, 0.7);
 }
 
 /* La estrella justo bajo el cursor se distingue ligeramente más que el resto de la cascada iluminada */
@@ -699,7 +699,9 @@ img { max-width: 100%; display: block; }
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 30px;
-    align-items: center;
+    /* "stretch" (en vez de "center") permite que el mapa herede la altura total de la
+       columna de tarjetas y que estas, a su vez, puedan repartirse esa altura con flex: 1 */
+    align-items: stretch;
     background: transparent;
     padding: 0;
     box-shadow: none;
@@ -725,7 +727,9 @@ img { max-width: 100%; display: block; }
     gap: 15px;
 }
 
-/* Define el recuadro blanco para cada bloque individual de información de contacto */
+/* Define el recuadro blanco para cada bloque individual de información de contacto.
+   flex: 1 hace que las 3 tarjetas repartan en partes iguales la altura total disponible
+   (heredada del mapa gracias al "stretch" de .location-grid), quedando todas del mismo alto */
 .info-card {
     background-color: var(--color-paper);
     color: var(--color-text-dark);
@@ -734,6 +738,7 @@ img { max-width: 100%; display: block; }
     display: flex;
     align-items: center;
     gap: 20px;
+    flex: 1;
     transition: transform 0.5s var(--ease-luxury), box-shadow 0.5s var(--ease-luxury);
     box-shadow: var(--shadow-soft);
 }
@@ -744,7 +749,7 @@ img { max-width: 100%; display: block; }
 .info-card:hover,
 .info-card.slide-in-right:hover {
     transform: translateX(-5px);
-    box-shadow: 0 14px 32px rgba(62, 39, 35, 0.14);
+    box-shadow: 0 14px 32px rgba(53, 42, 34, 0.14);
 }
 
 /* Crea un pequeño contenedor cuadrado con bordes para alojar el ícono de contacto */
@@ -788,6 +793,12 @@ img { max-width: 100%; display: block; }
 /* Evita un espacio extra debajo del último dato apilado */
 .info-content p .info-line:last-child {
     margin-bottom: 0;
+}
+
+/* Resalta un dato puntual (ej. "Domingo: Cerrado") con el mismo color de acento que ya usan los íconos de estas tarjetas */
+.info-line-accent {
+    color: var(--color-accent);
+    font-weight: 700;
 }
 
 
@@ -929,7 +940,7 @@ img { max-width: 100%; display: block; }
     position: absolute;
     top: 30px;
     left: 30px;
-    background: rgba(62, 39, 35, 0.8);
+    background: rgba(53, 42, 34, 0.8);
     backdrop-filter: blur(4px);
     color: var(--color-secondary);
     padding: 10px 20px;
