@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="icon" type="image/x-icon" href="public/cafe_icono.ico">
 
-    <!-- Performance: precalienta la conexión a los CDNs del video y el poster del hero para que arranquen antes -->
-    <link rel="preconnect" href="https://videos.pexels.com">
-    <link rel="preconnect" href="https://images.pexels.com">
+    <!-- Performance: precarga el póster del hero (alojado localmente) para que sea lo primero que se pinte -->
+    <link rel="preload" as="image" href="public/assets/images/hero/hero-poster.webp" type="image/webp">
 
     <!-- Íconos (Lucide anclado a versión fija para seguridad y FontAwesome) -->
     <script src="https://unpkg.com/lucide@0.344.0" defer></script>
@@ -53,10 +52,23 @@
 
     <main>
         <section id="inicio" class="hero">
-            <!-- Performance: Se añade poster para que cargue visualmente antes que el video -->
-            <video autoplay muted loop playsinline class="hero-video" poster="https://images.pexels.com/videos/7652196/analysis-apartment-asian-asian-man-7652196.jpeg?auto=compress&cs=tinysrgb&w=1280&q=80">
-                <source src="https://videos.pexels.com/video-files/7652196/7652196-uhd_2560_1440_30fps.mp4" type="video/mp4">
+            <!-- Performance: video alojado localmente (H.264, sin audio, faststart). 480p para móviles, 720p para el resto; el póster WebP se pinta antes que el video -->
+            <video autoplay muted loop playsinline preload="metadata" class="hero-video" poster="public/assets/images/hero/hero-poster.webp">
+                <source src="public/assets/videos/hero-480p.mp4" type="video/mp4" media="(max-width: 768px)">
+                <source src="public/assets/videos/hero-720p.mp4" type="video/mp4">
             </video>
+            <!-- Accesibilidad: con prefers-reduced-motion se cancela el video antes de que descargue y queda solo el póster -->
+            <script>
+                (function () {
+                    if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                    var v = document.querySelector('.hero-video');
+                    v.removeAttribute('autoplay');
+                    v.preload = 'none';
+                    v.pause();
+                    v.querySelectorAll('source').forEach(function (s) { s.remove(); });
+                    v.load();
+                })();
+            </script>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1>Donde cada sorbo cuenta una historia</h1>
