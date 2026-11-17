@@ -1302,3 +1302,16 @@ img { max-width: 100%; display: block; }
         justify-content: flex-start;
     }
 }
+/* ===== Control de reproducción del video del hero (WCAG 2.2.2: pausar/reproducir) ===== */
+.hero-video-toggle {
+    position: absolute; left: 1.25rem; bottom: 1.25rem; z-index: 2;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 1rem; border-radius: 999px; cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.55); color: #fff;
+    background: rgba(35, 26, 20, 0.55); backdrop-filter: blur(4px);
+    font: 500 0.85rem 'DM Sans', sans-serif;
+    transition: background 0.2s ease;
+}
+.hero-video-toggle:hover { background: rgba(196, 139, 90, 0.85); }
+.hero-video-toggle:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.hero-video-toggle svg { width: 16px; height: 16px; }

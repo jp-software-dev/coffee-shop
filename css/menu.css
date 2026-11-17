@@ -454,3 +454,118 @@
     /* Reduce el relleno superior e inferior de la barra de navegación */
     .menu-nav { padding: 1rem 0; }
 }
+/* ===== Nombres de producto con foto (abren un visor al hacer clic) ===== */
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.item-photo-link {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: inherit;
+    border-bottom: 2px solid rgba(196, 139, 90, 0.45);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.item-photo-link i, .item-photo-link svg {
+    width: 0.62em; height: 0.62em; color: var(--color-accent); flex-shrink: 0;
+    opacity: 0.85; transition: transform 0.2s ease;
+}
+.item-photo-link:hover { color: var(--color-accent); border-color: var(--color-accent); }
+.item-photo-link:hover svg { transform: scale(1.15); }
+.item-photo-link:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; border-radius: 4px; }
+
+/* ===== Visor / modal de producto ===== */
+.photo-dialog {
+    border: 0; padding: 0; background: transparent; overflow: visible;
+    width: min(92vw, 500px); max-width: 500px; max-height: none; margin: auto;
+}
+.photo-dialog::backdrop { background: rgba(30, 21, 15, 0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+
+.photo-card {
+    display: flex; flex-direction: column;
+    max-height: 92vh; max-height: 92dvh;
+    background: var(--color-bg-light);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(196, 139, 90, 0.35);
+}
+
+.photo-frame {
+    position: relative; flex: 0 1 auto;
+    aspect-ratio: 1000 / 840;
+    max-height: 48vh;
+    max-height: 48dvh;
+    background: linear-gradient(110deg, #e6dccb 30%, #f3ecdf 50%, #e6dccb 70%) 0 0 / 200% 100%;
+    animation: photoShimmer 1.4s linear infinite;
+}
+.photo-frame img {
+    display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;
+    opacity: 0; transition: opacity 0.35s ease;
+}
+.photo-frame img.is-loaded { opacity: 1; }
+.photo-frame:has(img.is-loaded) { animation: none; }
+/* Sombra interior suave que funde la foto con la tarjeta */
+.photo-frame::after {
+    content: ""; position: absolute; inset: auto 0 0 0; height: 70px; pointer-events: none;
+    background: linear-gradient(to top, rgba(252, 250, 237, 0.95), rgba(252, 250, 237, 0));
+}
+
+.photo-body {
+    position: relative; padding: 0.25rem 1.6rem 1.6rem; overflow-y: auto;
+    scrollbar-width: thin; scrollbar-gutter: stable both-edges;
+    border-top: 3px solid transparent;
+}
+.photo-category {
+    margin: 0 0 0.35rem; font: 700 0.72rem/1 'DM Sans', sans-serif;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-accent);
+}
+.photo-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.photo-title-row h2 {
+    margin: 0; font: 700 1.65rem/1.15 'Roboto Slab', serif; color: var(--color-primary);
+}
+.photo-price { font: 400 1.6rem/1 'Italiana', serif; color: var(--color-accent); white-space: nowrap; }
+.photo-desc {
+    margin: 0.7rem 0 0; font: italic 300 1.02rem/1.55 'DM Sans', sans-serif; color: var(--color-text-muted);
+}
+.photo-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.1rem 0 0; padding: 0; }
+.photo-tags li {
+    font: 500 0.82rem/1 'DM Sans', sans-serif; color: var(--color-primary);
+    background: var(--color-surface); border: 1px solid rgba(196, 139, 90, 0.4);
+    padding: 0.5rem 0.85rem; border-radius: 999px;
+}
+.photo-tags li::before { content: "✦"; color: var(--color-accent); margin-right: 0.45rem; font-size: 0.7rem; }
+.photo-cta {
+    display: inline-block; margin-top: 1.3rem; padding: 0.7rem 1.4rem; border-radius: 999px;
+    background: var(--color-accent); color: #fff; text-decoration: none;
+    font: 700 0.9rem/1 'DM Sans', sans-serif; transition: background 0.2s ease, transform 0.2s ease;
+}
+.photo-cta:hover { background: var(--color-primary); transform: translateY(-1px); }
+.photo-cta:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+
+.photo-dialog-close {
+    position: absolute; top: 12px; right: 12px; width: 42px; height: 42px;
+    border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.6); cursor: pointer;
+    display: grid; place-items: center; z-index: 3;
+    background: rgba(35, 26, 20, 0.6); color: #fff;
+    backdrop-filter: blur(4px); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.photo-dialog-close:hover { background: var(--color-accent); transform: rotate(90deg); }
+.photo-dialog-close:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+.photo-dialog[open] { animation: photoIn 0.26s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes photoIn { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes photoShimmer { to { background-position: -200% 0; } }
+
+@media (max-width: 480px) {
+    .photo-body { padding: 0.1rem 1.2rem 1.3rem; }
+    .photo-title-row h2 { font-size: 1.4rem; }
+    .photo-price { font-size: 1.4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .photo-dialog[open], .photo-frame { animation: none; }
+    .photo-dialog-close:hover { transform: none; }
+}

@@ -175,14 +175,15 @@ document.addEventListener('DOMContentLoaded', () => {
     /* TRAMPA DE TIEMPO: Registra el momento exacto en que se carga el script en el navegador del usuario */
     const formLoadTime = new Date().getTime();
 
-    /* Establece fecha mínima a hoy para evitar que los usuarios seleccionen días en el pasado */
-    if (fechaInput) {
-        const today = new Date().toISOString().split('T')[0];
-        fechaInput.setAttribute('min', today);
-    }
+    /* Devuelve la fecha de hoy en formato YYYY-MM-DD según el reloj LOCAL del dispositivo.
+       (toISOString() usa UTC: en México, después de las 6 pm devolvía "mañana" y bloqueaba reservar para hoy) */
+    const getTodayStr = () => {
+        const d = new Date();
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    };
 
-    /* Devuelve la fecha de hoy en formato YYYY-MM-DD según el reloj local del dispositivo */
-    const getTodayStr = () => new Date().toISOString().split('T')[0];
+    /* Establece fecha mínima a hoy para evitar que los usuarios seleccionen días en el pasado */
+    if (fechaInput) fechaInput.setAttribute('min', getTodayStr());
 
     /* Devuelve la hora actual en formato HH:MM para compararla directamente contra el valor del input time */
     const getNowTimeStr = () => {
@@ -197,12 +198,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const submitBtn = document.getElementById('submitBtn');
         const isToday = fechaInput.value === getTodayStr();
-        const isPastTime = isToday && horaInput.value !== '' && horaInput.value <= getNowTimeStr();
 
-        if (isPastTime) {
+        /* Horario real del local: Lun–Vie 9:00–20:00, Sáb 9:00–14:00, Domingo cerrado */
+        let errorMsg = '';
+        if (fechaInput.value) {
+            const [y, m, d] = fechaInput.value.split('-').map(Number);
+            const weekday = new Date(y, m - 1, d).getDay(); // 0 = domingo, 6 = sábado
+            if (weekday === 0) {
+                errorMsg = 'Los domingos estamos cerrados. Elige otro día.';
+            } else if (weekday === 6 && horaInput.value && horaInput.value > '14:00') {
+                errorMsg = 'Los sábados atendemos hasta las 2:00 PM.';
+            }
+        }
+        if (!errorMsg && isToday && horaInput.value !== '' && horaInput.value <= getNowTimeStr()) {
+            errorMsg = 'Elige una hora posterior a la hora actual.';
+        }
+
+        if (errorMsg) {
             horaInput.classList.add('input-error');
             if (horaErrorMsg) {
-                horaErrorMsg.textContent = 'Elige una hora posterior a la hora actual.';
+                horaErrorMsg.textContent = errorMsg;
                 horaErrorMsg.classList.add('show');
             }
             if (submitBtn) submitBtn.disabled = true;
@@ -463,5 +478,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 2000);
         });
+    }
+
+    /* 8. VISOR DE PRODUCTO (menu.html): cada nombre con .item-photo-link abre un <dialog> con su foto, precio,
+          descripción original del menú y detalles de preparación. La foto solo se descarga al abrir (o al
+          pasar el cursor / enfocar el enlace), así no pesa en la carga inicial. */
+    const photoDialog = document.getElementById('photoDialog');
+    if (photoDialog && typeof photoDialog.showModal === 'function') {
+        const photoImg = document.getElementById('photoDialogImg');
+        const photoTitle = document.getElementById('photoTitle');
+        const photoPrice = document.getElementById('photoPrice');
+        const photoDesc = document.getElementById('photoDesc');
+        const photoTags = document.getElementById('photoTags');
+        const photoCategory = document.getElementById('photoCategory');
+
+        const preloaded = new Set();
+        const preload = (src) => {
+            if (preloaded.has(src)) return;
+            preloaded.add(src);
+            new Image().src = src;
+        };
+
+        document.querySelectorAll('.item-photo-link').forEach(link => {
+            const src = link.dataset.photo;
+            link.addEventListener('mouseenter', () => preload(src));
+            link.addEventListener('focus', () => preload(src));
+            link.addEventListener('touchstart', () => preload(src), { passive: true });
+
+            link.addEventListener('click', () => {
+                const item = link.closest('.menu-item');
+                const name = link.querySelector('.item-name').textContent.trim();
+                const section = link.closest('section');
+
+                /* Texto del menú: se lee del propio HTML para no duplicar ni alterar precios/descripciones */
+                photoTitle.textContent = name;
+                photoPrice.textContent = item.querySelector('.price').textContent.trim();
+                photoDesc.textContent = item.querySelector('.item-desc').textContent.trim();
+                photoCategory.textContent = section ? section.querySelector('h2').textContent.trim() : '';
+
+                photoTags.replaceChildren(...(link.dataset.tags || '').split('|').filter(Boolean).map(t => {
+                    const li = document.createElement('li');
+                    li.textContent = t;
+                    return li;
+                }));
+
+                /* Foto: aparece con fundido cuando termina de cargar (mientras tanto se ve un shimmer) */
+                photoImg.classList.remove('is-loaded');
+                photoImg.alt = `Foto de ${name}`;
+                photoImg.onload = () => photoImg.classList.add('is-loaded');
+                photoImg.src = src;
+                if (photoImg.complete && photoImg.naturalWidth) photoImg.classList.add('is-loaded');
+
+                photoDialog.showModal();
+                photoDialog.querySelector('.photo-dialog-close').blur();
+            });
+        });
+
+        document.getElementById('photoDialogClose').addEventListener('click', () => photoDialog.close());
+        /* Clic en el fondo oscuro (fuera de la tarjeta) también cierra */
+        photoDialog.addEventListener('click', (e) => { if (e.target === photoDialog) photoDialog.close(); });
     }
 });

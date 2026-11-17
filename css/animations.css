@@ -156,11 +156,7 @@
         transform: none !important;
     }
 
-    /* Hero: se oculta el video y se muestra solo el póster estático (respaldo si JS está desactivado) */
-    .hero-video {
-        display: none;
-    }
-
+    /* Hero: el video se mantiene en el DOM (el póster lo cubre) para que el botón "Reproducir video" pueda activarlo */
     .hero {
         isolation: isolate; /* mantiene el overlay (z-index: -1) por encima de este fondo */
         background: url('../public/assets/images/hero/hero-poster.webp') center / cover no-repeat;

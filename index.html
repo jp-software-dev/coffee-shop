@@ -57,16 +57,43 @@
                 <source src="public/assets/videos/hero-480p.mp4" type="video/mp4" media="(max-width: 768px)">
                 <source src="public/assets/videos/hero-720p.mp4" type="video/mp4">
             </video>
-            <!-- Accesibilidad: con prefers-reduced-motion se cancela el video antes de que descargue y queda solo el póster -->
+            <!-- El video se reproduce automáticamente al entrar; el botón permite pausarlo/reanudarlo (WCAG 2.2.2) -->
+            <button type="button" class="hero-video-toggle" id="heroVideoToggle" aria-pressed="true">
+                <svg id="heroVideoIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                <span id="heroVideoLabel">Reproducir video</span>
+            </button>
             <script>
                 (function () {
-                    if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
                     var v = document.querySelector('.hero-video');
-                    v.removeAttribute('autoplay');
-                    v.preload = 'none';
-                    v.pause();
-                    v.querySelectorAll('source').forEach(function (s) { s.remove(); });
-                    v.load();
+                    var btn = document.getElementById('heroVideoToggle');
+                    var icon = document.getElementById('heroVideoIcon');
+                    var label = document.getElementById('heroVideoLabel');
+                    var PLAY = 'M8 5v14l11-7z', PAUSE = 'M6 5h4v14H6zM14 5h4v14h-4z';
+
+                    function render() {
+                        var playing = !v.paused;
+                        icon.firstElementChild.setAttribute('d', playing ? PAUSE : PLAY);
+                        label.textContent = playing ? 'Pausar video' : 'Reproducir video';
+                        btn.setAttribute('aria-pressed', String(playing));
+                    }
+
+                    /* El video siempre arranca solo (muted + playsinline permiten autoplay). Si el navegador
+                       lo bloquea, el botón queda como "Reproducir video". */
+                    var started = v.play();
+                    if (started && started.catch) started.catch(function () {});
+
+                    btn.addEventListener('click', function () {
+                        if (v.paused) {
+                            v.preload = 'auto';
+                            var p = v.play();
+                            if (p && p.catch) p.catch(function () {});
+                        } else {
+                            v.pause();
+                        }
+                    });
+                    v.addEventListener('play', render);
+                    v.addEventListener('pause', render);
+                    render();
                 })();
             </script>
             <div class="hero-overlay"></div>
