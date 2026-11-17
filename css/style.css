@@ -1315,3 +1315,15 @@ img { max-width: 100%; display: block; }
 .hero-video-toggle:hover { background: rgba(196, 139, 90, 0.85); }
 .hero-video-toggle:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .hero-video-toggle svg { width: 16px; height: 16px; }
+
+/* ===== Aviso de contenido de ejemplo (reseñas demo) ===== */
+.demo-notice {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    max-width: 640px; margin: 1.25rem auto 0; padding: 0.6rem 1rem;
+    border-radius: 12px; text-align: left;
+    background: var(--color-surface); color: var(--color-text-muted);
+    border: 1px dashed rgba(196, 139, 90, 0.7);
+    font-size: 0.9rem; line-height: 1.4;
+}
+.demo-notice svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--color-accent); }
+.demo-notice--form { display: flex; margin: 0 0 1.25rem; max-width: none; }
